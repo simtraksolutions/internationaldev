@@ -68,12 +68,11 @@
 
     <div class="container">
 
-        <form id="signInForm">
+        <form id="signInForm"  method="POST" action="signin.php">
             <div class="img">
-                <center>
-                    <img src="https://adore.ivdata.in/cores/img/adore_pcons2.png
-                " width="200px">
-                </center>
+                <!-- <center>
+                    <img src="https://adore.ivdata.in/cores/img/adore_pcons2.png" width="200px">
+                </center> -->
             </div>
             <br>
             <br>
@@ -87,7 +86,7 @@
 
             <br><br>
 
-            <button type="button" onclick="signIn()">Log In</button>
+            <button type="submit" onclick="signIn()">Log In</button>
             <br><br>
 
             <!-- <label>create account</label>-->
@@ -100,10 +99,9 @@
     </div>
 
 
-    <script>
+    <!-- <script>
         function signIn() {
-            // You can add JavaScript logic here for handling the sign-in process
-            // alert('Sign-in logic will go here.');
+            
             // Get values from 
             var username = document.getElementById('username').value;
             var password = document.getElementById('password').value;
@@ -116,7 +114,7 @@
             }
 
         }
-    </script>
+    </script> -->
 
 </body>
 
