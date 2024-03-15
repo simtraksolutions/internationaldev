@@ -20,7 +20,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 setcookie("email", $row["email"], time() + (86400 * 30), "/"); // 30 days
             }
 
+<<<<<<< HEAD
             header("Location: Home_page.php");
+=======
+            header("Location: homepage.html");
+>>>>>>> 39c9ff466592edb622e55a0beb35c02c01ade2f3
             exit();
         } else {
             // Invalid password

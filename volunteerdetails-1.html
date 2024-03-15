@@ -1,3 +1,24 @@
+<?php
+
+include("db_connect.php");
+session_start();
+$name = '';
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+if (isset($_SESSION["name"]) && !empty($_SESSION["name"])) {
+    $name = $_SESSION["name"];
+
+  }
+
+
+// Assuming you have a table named 'your_table' with columns 'id', 'name', 'task_name', 'action', 'status'
+$sql = "SELECT * FROM registration";
+$result = $conn->query($sql);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +26,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!--<meta http-equiv="X-UA-Compatible" content="ie=edge" />-->
-    <title> Volunteer details pg-2</title>
+    <title> Volunteer details pg-1</title>
+
     <style>
         * {
             margin: 0;
@@ -20,18 +42,16 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
-            /* background-image: linear-gradient(rgba(74, 71, 116, 0.8), rgba(71, 71, 116, 0.8)), url(https://img.freepik.com/free-photo/people-stacking-hands-together-park_53876-63293.jpg?t=st=1701355602~exp=1701356202~hmac=eadd99e04541987aece0dee4794014aca6aa165431007e545a2c78028856e84f);*/
             background-position: center;
             background-image: url(//www.presentationmagazine.com/images3/subtle-waves468.jpg);
             background-image: url(https://www.imageshine.in/uploads/gallery/geometric-Blue-Wallpaper-Free-Download.jpg);
-            /*background-image:url(https://static.vecteezy.com/system/resources/previews/003/127/954/non_2x/abstract-template-blue-background-white-squares-free-vector.jpg);*/
             background-color: #f8f6f6;
             background-size: cover;
         }
         
         .container {
             position: relative;
-            max-width: 600px;
+            max-width: 650px;
             width: 100%;
             background: #fff;
             padding: 25px;
@@ -58,20 +78,11 @@
             scrollbar-width: none;
         }
         
-        .header1 {
+        .container header {
             font-size: 30px;
             color: #0b0b0b;
             font-weight: 500;
-            /*text-align: left;*/
-            width: auto;
-        }
-        
-        .header2 {
-            font-size: 20px;
-            color: #0b0b0b;
-            font-weight: 500;
-            text-align: right;
-            width: auto;
+            text-align: center;
         }
         
         .container .form {
@@ -101,6 +112,7 @@
             padding: 0 15px;
         }
         
+        
         .input-box input:focus {
             box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
         }
@@ -108,6 +120,53 @@
         .form .column {
             display: flex;
             column-gap: 15px;
+        }
+        
+        .form .gender-box {
+            margin-top: 20px;
+        }
+        
+        .gender-box h3 {
+            color: #020202;
+            font-size: 1rem;
+            font-weight: 400;
+            margin-bottom: 8px;
+        }
+        
+        .form :where(.gender-option, .gender) {
+            display: flex;
+            align-items: center;
+            column-gap: 130px;
+            flex-wrap: wrap;
+        }
+        
+        .form .gender {
+            column-gap: 5px;
+        }
+        
+        .gender input {
+            accent-color: rgb(0, 0, 0);
+        }
+        
+        .form :where(.gender input, .gender label) {
+            cursor: pointer;
+        }
+        
+        .gender label {
+            color: #000000;
+        }
+        
+        .address :where(input, .select-box) {
+            margin-top: 5px;
+        }
+        
+        .select-box select {
+            height: 100%;
+            width: 100%;
+            outline: none;
+            border: none;
+            color: #6b6565;
+            font-size: 1rem;
         }
         
         .input-box input:focus {
@@ -135,8 +194,11 @@
         /*Responsive*/
         
         @media screen and (max-width: 500px) {
-            .form.column {
+            .form .column {
                 flex-wrap: wrap;
+            }
+            .form :where(.gender-option, .gender) {
+                row-gap: 15px;
             }
         }
     </style>
@@ -144,66 +206,60 @@
 
 <body>
     <section class="container">
-        <header>
-
-            <div class="header1">Volunteer Additional details
-<<<<<<< HEAD
-                <a href="Home_page.php" style="float:right;">
-=======
-                <a href="http://127.0.0.1:5500/profile%20view.html" style="float:right;">
->>>>>>> 39c9ff466592edb622e55a0beb35c02c01ade2f3
-                    <button style="padding-left:2px; padding-right:2px; padding-bottom:2px ; padding-top:5px">skip for now</button></a>
+        <header>International Volunteer details</header>
+        <hr> 
+      
+        <form  method="POST" class="form" action="volunteerdetails1.php">
+            <div class="input-box">
+                <label> Name</label>
+              
+                <input type="text"  name="name"  id="name" placeholder="Enter name" onkeydown="return /[a-z]/i.test(event.key)"  required />
             </div>
-
-        </header>
-        <hr>
-        <form action="volunteerdetails2.php" class="form" method="POST">
 
             <div class="input-box">
-                <label>College/University</label>
-<<<<<<< HEAD
-                <input type="text" placeholder="Enter college/university name" name="college" id="college" onkeydown="return /[a-z]/i.test(event.key)" required />
-            </div>
-            <div class="input-box">
-                <label>Course</label>
-                <input type="text" placeholder="Enter course" id="course" name="course" onkeydown="return /[a-z]/i.test(event.key)" required />
-=======
-                <input type="text" placeholder="Enter college/university name" name="college" id="college"/>
-            </div>
-            <div class="input-box">
-                <label>Course</label>
-                <input type="text" placeholder="Enter course" id="course" name="course" />
->>>>>>> 39c9ff466592edb622e55a0beb35c02c01ade2f3
+                <label>Email Address *</label>
+                <input type="email" name="email" id="email" placeholder="Enter email address"  required />
             </div>
 
+         
 
             <div class="column">
                 <div class="input-box">
-                    <label>Linkedin link</label>
-<<<<<<< HEAD
-                    <input type="link" placeholder="Enter Id link" id="linkedin" name="linkedin" required/>
-=======
-                    <input type="link" placeholder="Enter Id link" id="linkedin" name="linkedin" />
->>>>>>> 39c9ff466592edb622e55a0beb35c02c01ade2f3
+                    <label>Country code </label>
+                    <input type="text" name="country_code" id="country_code" placeholder="Enter country code"  onkeydown="return /[0-9 ]/i.test(event.key)" required />
+                </div>
+                <div class="input-box">
+                    <label>Phone number</label>
+                    <input type="text"  name="phone_number" id="phone_number"  placeholder="Enter phone number"  onkeydown="return /[0-9]/i.test(event.key)" required />
                 </div>
             </div>
 
-            <div class="input-box">
-                <label>Facebook link</label>
-<<<<<<< HEAD
-                <input type="link" placeholder="Enter id link" id="facebook" name="facebook" required/>
-=======
-                <input type="link" placeholder="Enter id link" id="facebook" name="facebook" />
->>>>>>> 39c9ff466592edb622e55a0beb35c02c01ade2f3
+            <div class="column">
+                <div class="input-box">
+                    <label>Country</label>
+                    <input type="text" name="country" placeholder="Enter country name" id="country" onkeydown="return /[a-z]/i.test(event.key)"  required />
+                </div>
+
+                <div class="input-box">
+                    <label>City</label>
+                    <input type="text" name="city" placeholder="Enter city name" id="city"  onkeydown="return /[a-z]/i.test(event.key)"   required>
+
+
+                </div>
             </div>
 
-
-
-<<<<<<< HEAD
-            <a href="#"><button type="submit">submit</button></a>
+            <div class="column">
+                <div class="input-box">
+                    <label>Source of joining</label>
+                    <input type="text" placeholder="Enter source of joining" id="source_of_joining" name="source_of_joining"  required />
+                </div>
+            </div>
+            </div>
+            <button type="submit">Submit</button>
         </form>
+        
     </section>
-
+   
 
 </script>
 
@@ -237,11 +293,6 @@ return ((key >= 65 && key <= 90) || (key >= 95 && key <= 122));
 
 }
 </script>
-=======
-            <a href="http://127.0.0.1:5500/profile%20view.html"><button type="submit">submit</button></a>
-        </form>
-    </section>
->>>>>>> 39c9ff466592edb622e55a0beb35c02c01ade2f3
 </body>
 
 </html>
