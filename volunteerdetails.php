@@ -1,3 +1,24 @@
+<?php
+
+include("db_connect.php");
+session_start();
+$name = '';
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+if (isset($_SESSION["name"]) && !empty($_SESSION["name"])) {
+    $name = $_SESSION["name"];
+
+  }
+
+
+// Assuming you have a table named 'your_table' with columns 'id', 'name', 'task_name', 'action', 'status'
+$sql = "SELECT * FROM registration";
+$result = $conn->query($sql);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,6 +27,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!--<meta http-equiv="X-UA-Compatible" content="ie=edge" />-->
     <title> Volunteer details pg-1</title>
+
     <style>
         * {
             margin: 0;
@@ -89,6 +111,7 @@
             border-radius: 6px;
             padding: 0 15px;
         }
+        
         
         .input-box input:focus {
             box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
@@ -184,89 +207,42 @@
 <body>
     <section class="container">
         <header>International Volunteer details</header>
-        <hr>
-        <form action="#" class="form">
+        <hr> 
+      
+        <form  method="POST" class="form" action="volunteerdetails1.php">
             <div class="input-box">
                 <label> Name</label>
-                <input type="text" placeholder="Enter name" required />
+              
+                <input type="text"  name="name"  id="name" placeholder="Enter name" onkeydown="return /[a-z]/i.test(event.key)"  required />
             </div>
 
             <div class="input-box">
-                <label>Email Address</label>
-                <input type="email" placeholder="Enter email address" required />
+                <label>Email Address *</label>
+                <input type="email" name="email" id="email" placeholder="Enter email address"  required />
             </div>
 
-
+         
 
             <div class="column">
                 <div class="input-box">
                     <label>Country code </label>
-                    <input type="text" placeholder="Enter country code" required />
+                    <input type="text" name="country_code" id="country_code" placeholder="Enter country code"  onkeydown="return /[0-9 ]/i.test(event.key)" required />
                 </div>
                 <div class="input-box">
                     <label>Phone number</label>
-                    <input type="text" placeholder="Enter phone number" required />
+                    <input type="text"  name="phone_number" id="phone_number"  placeholder="Enter phone number"  onkeydown="return /[0-9]/i.test(event.key)" required />
                 </div>
             </div>
-
-            <!--<div class="gender-box">
-                <h3>Gender</h3>
-                <div class="gender-option">
-                    <div class="gender">
-                        <input type="radio" id="check-male" name="gender" />
-                        <label for="check-male">male</label>
-                    </div>
-                    <div class="gender">
-                        <input type="radio" id="check-female" name="gender" />
-                        <label for="check-female">Female</label>
-                    </div>
-                    <div class="gender">
-                        <input type="radio" id="check-other" name="gender" />
-                        <label for="check-other">prefer not to say</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="input-box">
-                <label>College/University</label>
-                <input type="text" placeholder="Enter college/university name" />
-            </div>
-            <div class="input-box">
-                <label>Course</label>
-                <input type="text" placeholder="Enter course" />
-            </div>-->
-
-            <!--<div class="column">
-                <div class="input-box">
-                    <label>Admin name</label>
-                    <div class="select-box">
-                        <select id="dropdown">
-                        <option >Enter your Admin name </option>
-                        <option >Adeline</option>
-                        <option >Akhil</option>
-                        <option >Atiya</option>
-                        <option >Faisal</option>
-                        <option >Shalini</option>
-                    
-                        
-                    </select>
-                    </div>
-                </div>
-                <div class="input-box">
-                    <label>source of joining</label>
-                    <input type="text" placeholder="Enter source of joining" required />
-                </div>
-            </div>-->
 
             <div class="column">
                 <div class="input-box">
                     <label>Country</label>
-                    <input type="text" placeholder="Enter country name" required />
+                    <input type="text" name="country" placeholder="Enter country name" id="country" onkeydown="return /[a-z]/i.test(event.key)"  required />
                 </div>
 
                 <div class="input-box">
                     <label>City</label>
-                    <input type="text" placeholder="Enter city name" required>
+                    <input type="text" name="city" placeholder="Enter city name" id="city"  onkeydown="return /[a-z]/i.test(event.key)"   required>
 
 
                 </div>
@@ -275,13 +251,48 @@
             <div class="column">
                 <div class="input-box">
                     <label>Source of joining</label>
-                    <input type="text" placeholder="Enter source of joining" required />
+                    <input type="text" placeholder="Enter source of joining" id="source_of_joining" name="source_of_joining"  required />
                 </div>
             </div>
             </div>
-            <button>Submit</button>
+            <button type="submit">Submit</button>
         </form>
+        
     </section>
+   
+
+</script>
+
+<!-- // data ko charcter me show krne ke liye -->
+<script>
+    function alphaOnly(event) {
+
+
+alert(event);
+var key;
+
+
+
+if (window.event) {
+
+key = window.event.key;
+
+} else if (e) {
+
+key = e.which;
+
+}
+
+//var key = window.event.key || event.key;
+
+alert(key.value);
+
+return ((key >= 65 && key <= 90) || (key >= 95 && key <= 122));
+
+
+
+}
+</script>
 </body>
 
 </html>

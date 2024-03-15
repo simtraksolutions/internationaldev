@@ -147,41 +147,75 @@
         <header>
 
             <div class="header1">Volunteer Additional details
-                <a href="http://127.0.0.1:5500/profile%20view.html" style="float:right;">
+                <a href="Home_page.php" style="float:right;">
                     <button style="padding-left:2px; padding-right:2px; padding-bottom:2px ; padding-top:5px">skip for now</button></a>
             </div>
 
         </header>
         <hr>
-        <form action="#" class="form">
+        <form action="volunteerdetails2.php" class="form" method="POST">
 
             <div class="input-box">
                 <label>College/University</label>
-                <input type="text" placeholder="Enter college/university name" />
+                <input type="text" placeholder="Enter college/university name" name="college" id="college" onkeydown="return /[a-z]/i.test(event.key)" required />
             </div>
             <div class="input-box">
                 <label>Course</label>
-                <input type="text" placeholder="Enter course" />
+                <input type="text" placeholder="Enter course" id="course" name="course" onkeydown="return /[a-z]/i.test(event.key)" required />
             </div>
 
 
             <div class="column">
                 <div class="input-box">
                     <label>Linkedin link</label>
-                    <input type="link" placeholder="Enter Id link" />
+                    <input type="link" placeholder="Enter Id link" id="linkedin" name="linkedin" required/>
                 </div>
             </div>
 
             <div class="input-box">
                 <label>Facebook link</label>
-                <input type="link" placeholder="Enter id link" />
+                <input type="link" placeholder="Enter id link" id="facebook" name="facebook" required/>
             </div>
 
 
 
-            <a href="http://127.0.0.1:5500/profile%20view.html"><button>submit</button></a>
+            <a href="#"><button type="submit">submit</button></a>
         </form>
     </section>
+
+
+</script>
+
+<!-- // data ko charcter me show krne ke liye -->
+<script>
+    function alphaOnly(event) {
+
+
+alert(event);
+var key;
+
+
+
+if (window.event) {
+
+key = window.event.key;
+
+} else if (e) {
+
+key = e.which;
+
+}
+
+//var key = window.event.key || event.key;
+
+alert(key.value);
+
+return ((key >= 65 && key <= 90) || (key >= 95 && key <= 122));
+
+
+
+}
+</script>
 </body>
 
 </html>
