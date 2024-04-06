@@ -1,3 +1,7 @@
+<?php
+include 'db_connect.php';
+include 'fetch_data.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -276,40 +280,18 @@
 
                 </thead>
                 <tbody>
+                <?php 
+                    if($registeredUser->num_rows>0)
+                     while($user = $registeredUser->fetch_assoc()){ ?>
                     <tr role="row" class="row-1">
-                        <td data-label=" s.no"><a href="user.php">32565</a></td>
-                        <td class="name-cell" data-label=" name">Aishwarya </td>
+                        <td data-label=" s.no"><a href="#" class="profileLink"><?php echo $user['user_id']?></a></td>
+                        <td class="name-cell" data-label=" name"><?php echo $user['name']?></td>
                         <td data-label=" coordinator name"></td>
                         <td data-label=" team name"></td>
-                        <td data-label=" status">Active</td>
+                        <td data-label=" status"><?php echo $user['status']?></td>
                         <!--<td data-label="  "></td>-->
-                    </tr>
-                    <tr>
-                        <td width="auto" data-label=" s.no"><a href="http://127.0.0.1:5500/profile.html">66657</a></td>
-                        <td class="name-cell" data-label=" name">ananya</td>
-                        <td data-label=" coordinator name"></td>
-                        <td data-label=" team name"></td>
-                        <td data-label=" status">Active</td>
-                        <!--<td data-label="  "></td>-->
-                    </tr>
-                    <tr>
-                        <td width="auto" data-label=" s.no"><a href="http://127.0.0.1:5500/profile.html">68457</a></td>
-                        <td class="name-cell" data-label=" name">riya</td>
-                        <td data-label=" coordinator name"></td>
-                        <td data-label=" team name"></td>
-                        <td data-label=" status">progressive</td>
-                        <!--<td data-label="  "></td>-->
-                    </tr>
-                    <tr>
-                        <td width="auto" data-label=" s.no"><a href="http://127.0.0.1:5500/profile.html">68667</a></td>
-                        <td class="name-cell" data-label=" name">karthik</td>
-                        <td data-label=" coordinator name"></td>
-                        <td data-label=" team name"></td>
-                        <td data-label=" status">Dormant</td>
-                        <!--<td data-label="  "></td>-->
-                    </tr>
-
-
+                    </tr>        
+                <?php }?>
                 </tbody>
             </table>
 
@@ -474,6 +456,30 @@
             document.getElementById("popup-container").style.display = "none";
         }
     </script>
+
+
+    <script>
+        //collect the userIDs from the table and redirect the user to the profile page
+        // Get all anchor elements with the class "profileLink"
+        const anchorElements = document.querySelectorAll('.profileLink');
+
+        // Add a click event listener to each anchor tag
+        anchorElements.forEach((anchor) => {
+        anchor.addEventListener('click', (e) => {
+            e.preventDefault();
+            const userId = anchor.textContent;
+            loadProfile(userId);
+        });
+    });
+
+
+        //Javascritp function to redirect the user to the profile page
+        function loadProfile(volunteerId) {
+
+    location.href = './profile.php?user_id=' + volunteerId ;
+    }
+    </script>
+
 
 
 
