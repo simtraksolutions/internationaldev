@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page for Volunteers</title>
     <?php
-    include("Home.php");
+    include("db_connection.php");
+    include("fetch_data.php");
     ?>
 <link
     href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css"

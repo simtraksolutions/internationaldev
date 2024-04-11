@@ -37,31 +37,31 @@ if(isset($_GET['user_id']))
     // }
 
 
-    //query to get tasks based on user id and status
-    $all_tasks = "SELECT * FROM tasks WHERE user_id = $userId";
-    $ongoing_tasks = "SELECT * FROM tasks WHERE status = 'ongoing' AND user_id = $userId";
-    $completed_tasks = "SELECT * FROM tasks WHERE status = 'completed' AND user_id = $userId";
-    $paused_tasks = "SELECT * FROM tasks WHERE status = 'paused' AND user_id = $userId";
+    //query to get task based on user id and status
+    $all_task = "SELECT * FROM addvolunteer1 WHERE user_id = $userId";
+    $ongoing_addvolunteer1 = "SELECT * FROM addvolunteer1 WHERE status = 'ongoing' AND user_id = $userId";
+    $completed_addvolunteer1 = "SELECT * FROM addvolunteer1 WHERE status = 'completed' AND user_id = $userId";
+    $paused_addvolunteer1 = "SELECT * FROM addvolunteer1 WHERE status = 'paused' AND user_id = $userId";
     
 
 
 
-    // Set default task query to all tasks
-    $task_query = $all_tasks;
+    // Set default task query to all task
+    $task_query = $all_task;
 
     if (isset($_GET['task_status'])) {
         switch ($_GET['task_status']) {
             case 'ongoing':
-                $task_query = $ongoing_tasks;
+                $task_query = $ongoing_addvolunteer1;
                 break;
             case 'completed':
-                $task_query = $completed_tasks;
+                $task_query = $completed_addvolunteer1;
                 break;
             case 'paused':
-                $task_query = $paused_tasks;
+                $task_query = $paused_addvolunteer1;
                 break;
             default:
-                $task_query = $all_tasks;
+                $task_query = $all_addvolunteer1;
                 break;
         }
     }
