@@ -287,9 +287,9 @@ include 'fetch_data.php';
                     <tr role="row" class="row-1">
                         <td data-label=" s.no"><a href="#" class="profileLink"><?php echo $user['user_id']?></a></td>
                         <td class="name-cell" data-label=" name"><?php echo $user['name']?></td>
-                        <td data-label=" coordinator name"></td>
-                        <td data-label=" team name"></td>
-                        <td data-label=" status"><?php echo $user['status']?></td>
+                        <td data-label=" coordinator name"><?php echo $user['coordinator']?></td>
+                        <td data-label=" team name"><?php echo $user['teamname']?></td>
+                        <td data-label=" status">backend-col-to-be</td>
                         <!--<td data-label="  "></td>-->
                     </tr>        
                 <?php }?>

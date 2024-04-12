@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign up</title>
+    <title>Add User</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -76,6 +76,9 @@
             <label for="name">Name</label>
             <input type="text" name="name"  placeholder="Enter your name" id="name"  onkeydown="return /[a-z]/i.test(event.key)" required >
 
+            <label for="teamname">Coordinator name</label>
+            <input type="text" name="coordinator" id="coordinator" placeholder="Enter your Coordinator name" onkeydown="return /[a-z]/i.test(event.key)" required>
+            
             <label for="teamname">Team name</label>
             <input type="text" name="teamname" id="teamname" placeholder="Enter your Team name" onkeydown="return /[a-z]/i.test(event.key)" required>
 

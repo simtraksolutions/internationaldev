@@ -1,7 +1,3 @@
-<?php
-include('db_connect.php');
-include('fetch_data.php');
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,6 +5,10 @@ include('fetch_data.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VolunteerProfile</title>
+    <?php
+include('db_connect.php');
+include('fetch_data.php');
+?>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -476,7 +476,7 @@ include('fetch_data.php');
         <div class="task_section">
 
 <button id="all-tasks" onclick="loadTasks('all')">All Tasks</button>
-<button id="just-allotted" onclick="loadTasks('just_alloted')">Just Allotted</button>
+<button id="just-allotted" onclick="loadTasks('just_allotted')">Just Allotted</button>
 <button id="started" onclick="loadTasks('started')">Started </button>
 <button id="under-progress" onclick="loadTasks('under_progress')">Under Progress</button>
 <button id="completed" onclick="loadTasks('completed')">completed</button>
