@@ -286,7 +286,7 @@ include('fetch_data.php');
                         </div>
                         <div class="container12">
                             <div class="rrow">
-                            <a href="#" id="status" class="button"><?php echo $userStatus?></a>
+                            <a href="#" id="status" class="button">backend-yet-to-connect</a>
                             </div>
                         </div>
                     </div>

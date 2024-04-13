@@ -215,9 +215,9 @@ include 'fetch_data.php';
 
         <div class="container">
 
-            <a href="http://127.0.0.1:5500/volunteer%20details-1.html" class="button" onclick="addVolunteer()">Add Volunteer</a>
+            <a  class="button" onclick="addVolunteer()">Add Volunteer</a>
 
-            <a href="http://127.0.0.1:5500/add_volunteer_form.html" class="button" onclick="addVolunteerTask()">Add Task</a>
+            <a  class="button" onclick="addVolunteerTask()">Add Task</a>
 
             <!--<a href="#" class="button" onclick="addVolunteerTask()">Add Task</a>  -->
 
@@ -299,29 +299,18 @@ include 'fetch_data.php';
 
         </div>
     </div>
-    <script>
+
+        <script>
+        //adding volunteer
+        function addVolunteer() {
+            window.location.href = "volunteer_details-1.php";
+        }
+        //adding task for a particular volunteer
         function addVolunteerTask() {
-            var table = document.getElementById("volunteer_tasktable").getElementsByTagName('tbody')[0];
-            var newRow = table.insertRow(table.rows.length);
-
-            // Add cells
-            var cell1 = newRow.insertCell(0);
-            var cell2 = newRow.insertCell(1);
-            var cell3 = newRow.insertCell(2);
-            var cell4 = newRow.insertCell(3);
-            var cell5 = newRow.insertCell(4);
-
-
-
-            // Populate cells with default values or input fields
-            cell1.innerHTML = ""; // Volunteer ID
-            cell2.innerHTML = ""; // Name
-            cell3.innerHTML = ""; // Coordinator name
-            cell4.innerHTML = ""; // Team name
-            cell5.innerHTML = ""; // Status
-            // cell6.innerHTML = "";
+            window.location.href = "addvolunteer_pagenew.html";
         }
     </script>
+
 
     <!--<script>
                   // javascript functionality for searching by volunteer id

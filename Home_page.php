@@ -1,8 +1,3 @@
-<?php
-    include("db_connect.php");
-    include("fetch_data.php");
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,8 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>home page for volunteers</title>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <?php
+        include('db_connect.php');
+        include("fetch_data.php");
+    ?>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -322,9 +320,9 @@
 
         <div class="container">
 
-            <a href="http://127.0.0.1:5500/volunteer%20details-1.html" class="button" onclick="addVolunteer()">Add Volunteer</a>
+            <a class="button" onclick="addVolunteer()">Add Volunteer</a>
 
-            <a href="http://127.0.0.1:5500/add_volunteer_form.html" class="button" onclick="addVolunteerTask()">Add Task</a>
+            <a class="button" onclick="addVolunteerTask()">Add Task</a>
 
             <!--<a href="#" class="button" id="Add task" onclick="openPopup()">Add Task</a> /// by this add volunteer button acts as an popup
 
@@ -384,19 +382,23 @@
                 </thead>
                 <tbody>
                     <?php
-                    while($userData = $registeredUser->fetch_assoc()) {
-                    ?>
+                        if($registeredUser->num_rows > 0)
+                        {  while($row = $registeredUser->fetch_assoc()){?>
+                  
                     <tr role="row" class="row-1">
-                        <td data-label=" s.no"><a href="http://127.0.0.1:5500/profile.html"><?php echo $userData['user_id']?></a></td>
-                        <td data-label=" name"><?php echo $userData['name']?></td>
+                    <td data-label=" s.no"><a href="#" class="profileLink"><?php echo $row['user_id']?></a></td>
+                        <td data-label=" name"><?php echo $row['name']?></td>
                         <td data-label=" task">
                             <button type="button" class="btn btn-outline-primary"><a href="http://127.0.0.1:5500/volunteers_tasks.html"><i class="ri-list-check-3"></i></a></button>
                         </td>
-                        <td data-label=" action"></td>
-                        <td data-label=" status"><?php echo $userData['status']?></td>
+                        <td data-label=" action"><?php echo $row['action']?></td>
+                        <td data-label=" status">doubt-to-resolve</td>
                         <!--<td data-label="  "></td>-->
                     </tr>
-                   <?}?>
+
+
+                    <?php }}?>
+                
                 </tbody>
             </table>
 
@@ -404,26 +406,13 @@
         </div>
     </div>
     <script>
+        //adding volunteer
+        function addVolunteer() {
+            window.location.href = "volunteer_details-1.php";
+        }
+        //adding task for a particular volunteer
         function addVolunteerTask() {
-            var table = document.getElementById("volunteer_tasktable").getElementsByTagName('tbody')[0];
-            var newRow = table.insertRow(table.rows.length);
-
-            // Add cells
-            var cell1 = newRow.insertCell(0);
-            var cell2 = newRow.insertCell(1);
-            var cell3 = newRow.insertCell(2);
-            var cell4 = newRow.insertCell(3);
-            var cell5 = newRow.insertCell(4);
-
-
-
-            // Populate cells with default values or input fields
-            cell1.innerHTML = ""; // Volunteer ID
-            cell2.innerHTML = ""; // Name
-            cell3.innerHTML = ""; // Task Name
-            cell4.innerHTML = ""; // Action
-            cell5.innerHTML = ""; // Status
-            // cell6.innerHTML = "";
+            window.location.href = "addvolunteer_pagenew.html";
         }
     </script>
 
@@ -553,6 +542,29 @@
                 homePageIcon.classList.add("active");
             });
         });
+    </script>
+
+
+<script>
+        //collect the userIDs from the table and redirect the user to the profile page
+        // Get all anchor elements with the class "profileLink"
+        const anchorElements = document.querySelectorAll('.profileLink');
+
+        // Add a click event listener to each anchor tag
+        anchorElements.forEach((anchor) => {
+        anchor.addEventListener('click', (e) => {
+            e.preventDefault();
+            const userId = anchor.textContent;
+            loadProfile(userId);
+        });
+    });
+
+
+        //Javascritp function to redirect the user to the profile page
+        function loadProfile(volunteerId) {
+
+    location.href = './profile.php?user_id=' + volunteerId ;
+    }
     </script>
 
 

@@ -1,4 +1,6 @@
 <?php
+
+//query to get all the registered users
 $sql = "SELECT * from addvolunteer1";
 $registeredUser = $conn->query($sql);
 
@@ -39,7 +41,7 @@ if(isset($_GET['user_id']))
 
     //query to get task based on user id and status
     $all_task = "SELECT * FROM addvolunteer1 WHERE user_id = $userId";
-    $just_alloted = "SELECT * FROM addvolunteer1 WHERE status = 'just allotted' AND user_id = $userId";
+    $just_allotted = "SELECT * FROM addvolunteer1 WHERE status = 'just allotted' AND user_id = $userId";
     $started = "SELECT * FROM addvolunteer1 WHERE status = 'started' AND user_id = $userId";
     $under_progress = "SELECT * FROM addvolunteer1 WHERE status = 'under progress' AND user_id = $userId";
     $completed = "SELECT * FROM addvolunteer1 WHERE status = 'completed' AND user_id = $userId";
@@ -54,7 +56,7 @@ if(isset($_GET['user_id']))
     if (isset($_GET['task_status'])) {
         switch ($_GET['task_status']) {
             case 'just_allotted':
-                $task_query = $just_alloted;
+                $task_query = $just_allotted;
                 break;
             case 'started':
                 $task_query = $started;
