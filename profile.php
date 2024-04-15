@@ -269,15 +269,15 @@ include('fetch_data.php');
         <div class="content1">
             <div class="container" style="padding-left:40px; padding-right:40px;">
                 <div class="container1">
-                    <h2 style="font-weight:bold; margin-top:0; margin-bottom: 2px;">Prachi</h2>
-                    <h2 style="font-weight:100; margin-top:0">NIN - 0000</h2>
-                    <br>
-                    <br>
-
 <?php
     if ($personalDetails->num_rows > 0) $personal = $personalDetails->fetch_assoc();
     if ($eduDetails->num_rows > 0) $edu = $eduDetails->fetch_assoc();
  ?>
+                    <h2 style="font-weight:bold; margin-top:0; margin-bottom: 2px;"><?php echo $personal['first_name']?></h2>
+                    <h2 style="font-weight:100; margin-top:0">NIN - 0000 (yet-to-connect with backend)</h2>
+                    <br>
+                    <br>
+
                     <div class="row">
                         <div class="container11">
                             <div class="lrow">
@@ -301,7 +301,7 @@ include('fetch_data.php');
                         </div>
                         <div class="container12">
                             <div class="rrow">
-                            <label><?php echo $personal['name']?></label>
+                            <label><?php echo $personal['first_name']?></label>
                             </div>
                         </div>
                     </div>--

@@ -126,7 +126,8 @@
             overflow-x: auto;
             /*max-height: 800px;*/
             max-width: 1350px;
-            /*overflow-y: auto;*/
+            height: 75  0px;
+            /* overflow-y: auto; */
             border-radius: 3px;
             /* Enable vertical scrolling */
         }
@@ -386,12 +387,12 @@
                         {  while($row = $registeredUser->fetch_assoc()){?>
                   
                     <tr role="row" class="row-1">
-                    <td data-label=" s.no"><a href="#" class="profileLink"><?php echo $row['user_id']?></a></td>
-                        <td data-label=" name"><?php echo $row['name']?></td>
+                    <td data-label=" s.no"><a href="#" class="profileLink"><?php echo $row['id']?></a></td>
+                        <td data-label=" name"><?php echo $row['first_name']?></td>
                         <td data-label=" task">
-                            <button type="button" class="btn btn-outline-primary"><a href="http://127.0.0.1:5500/volunteers_tasks.html"><i class="ri-list-check-3"></i></a></button>
+                            <button type="button" class="btn btn-outline-primary"><a href="#" onclick="loadTasks(userId)"><i class="ri-list-check-3"></i></a></button>
                         </td>
-                        <td data-label=" action"><?php echo $row['action']?></td>
+                        <td data-label=" action">yet-to-connect</td>
                         <td data-label=" status">doubt-to-resolve</td>
                         <!--<td data-label="  "></td>-->
                     </tr>
@@ -546,25 +547,64 @@
 
 
 <script>
-        //collect the userIDs from the table and redirect the user to the profile page
-        // Get all anchor elements with the class "profileLink"
-        const anchorElements = document.querySelectorAll('.profileLink');
 
-        // Add a click event listener to each anchor tag
-        anchorElements.forEach((anchor) => {
-        anchor.addEventListener('click', (e) => {
-            e.preventDefault();
-            const userId = anchor.textContent;
-            loadProfile(userId);
+
+
+
+
+//collect the userIDs from the table and redirect the user to the profile page
+// Get all anchor elements with the class "profileLink"
+const anchorElements = document.querySelectorAll('.profileLink');
+
+// Add a click event listener to each anchor tag
+anchorElements.forEach((anchor) => {
+anchor.addEventListener('click', (e) => {
+    e.preventDefault();
+    const userId = anchor.textContent;
+    loadProfile(userId);
         });
     });
 
 
-        //Javascritp function to redirect the user to the profile page
+//add event listener to the task button and open the task page of that particular user
+// Get all table rows
+const tableRows = document.querySelectorAll('tr');
+//add event listener to each row
+tableRows.forEach((row) => {
+    row.addEventListener('click', (e) => {
+        e.preventDefault();
+        //get the user id from the row which is there in the second column
+        const userId = row.querySelector('td').textContent;
+        console.log(userId);
+
+        // loadTasks(userId);
+        // Get the task button from the row
+        const taskButton = row.querySelector('button');
+        // Add a click event listener to the task button
+        taskButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            // Get the user ID from the row
+            loadTasks(userId);
+
+        
+        });
+    });
+   
+});
+
+
+
+//Javascritp function to redirect the user to the profile page
         function loadProfile(volunteerId) {
 
     location.href = './profile.php?user_id=' + volunteerId ;
     }
+
+
+//javascript function to redirect the user to the task page
+        function loadTasks(volunteerId) {
+            location.href = './UserTasks.php?user_id=' + volunteerId;
+        }
     </script>
 
 

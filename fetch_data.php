@@ -1,7 +1,7 @@
 <?php
 
 //query to get all the registered users
-$sql = "SELECT * from addvolunteer1";
+$sql = "SELECT * from volunteerdetails";
 $registeredUser = $conn->query($sql);
 
 
@@ -15,21 +15,11 @@ if(isset($_GET['user_id']))
     $sql = "SELECT * FROM volunteer_details_two WHERE id = $userId";
     $eduDetails = $conn->query($sql);
     
-
+    //query to get the tasks of the user
     $sql = "SELECT status FROM addvolunteer1 WHERE user_id = $userId";
-    $statusResult = $conn->query($sql);
+    $task = $conn->query($sql);
 
-    // Check if the query returned a result
-    if ($statusResult->num_rows > 0) {
-        // Fetch the first (and only) row from the result
-        $row = $statusResult->fetch_assoc();
-
-        // Store the status in a variable
-        $userStatus = $row['status'];
-    } else {
-        // Handle the case where the user was not found in the addvolunteer table
-        echo "User not found in addvolunteer table";
-    }
+   //test to if the query is working and fetching the correct data
 
    
     //test to see if the query is working and fetching the correct data

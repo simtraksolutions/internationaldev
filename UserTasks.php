@@ -78,11 +78,18 @@
         </div>
         </div>
     </section>
-       <!-- Top-Section Ends  -->
 
-       <!-- Table Tasks  -->
-       <table class="table table-striped">
-        <thead>
+    <?php
+        include("db_connect.php");
+        include("fetch_data.php");
+    ?>
+
+
+<!-- Top-Section Ends  -->
+
+<!-- Table Tasks  -->
+<table class="table table-striped">
+    <thead>
           <tr>
             <th scope="col">ID</th>
             <th scope="col">Task Details</th>
@@ -93,32 +100,25 @@
           </tr>
         </thead>
         <tbody>
+<?php
+    if($task->num_rows > 0){
+        while($row = $task->fetch_assoc()){ echo $task->num_rows  ?>
+                    
           <tr>
-            <th scope="row">1</th>
-            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, inventore. </td>
-            <td>Ongoing</td>
-            <td>@mdo</td>
-            <td>@mdo</td>
-            <td>@mdo</td>
+            <td><?php echo $row['id']?></td>
+            <td><?php echo $row['task_name']?></td>
+            <td><?php echo $row['action']?></td>
+            <td><?php echo $row['allotment']?></td>
+            <td><?php echo $row['deadline']?></td>
+            <td><?php echo $row['task_date']?></td>
+
           </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Completed</td>
-            <td>@fat</td>
-            <td>@fat</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>lorem</td>
-            <td>Larry </td>
-            <td>@twitter</td>
-            <td>@twitter</td>
-            <td>@twitter</td>
-          </tr>
+          <?php } }?>
         </tbody>
       </table>
+
+      
+      
 
 
 

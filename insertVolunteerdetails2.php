@@ -12,13 +12,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Insert data into the database
     $sql = "INSERT INTO volunteer_details_two(college, course, linkedin, facebook) VALUES ('$college', '$course', '$linkedin', '$facebook')";
 
-    if ($conn->query($sql) === TRUE) {
-
-        if(mysqli_query($conn,$sql)){
+    if(mysqli_query($conn,$sql)){
             header("Location: Home_page.php");
             exit();
-          }
-        echo "Data inserted successfully";
+          
+        // echo "Data inserted successfully";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
