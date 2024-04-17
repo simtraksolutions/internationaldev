@@ -15,8 +15,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "INSERT INTO VolunteerDetails (name, email, country_code, phone_number, country, city, source_of_joining)
             VALUES ('$name', '$email', '$countryCode', '$phoneNumber', '$country', '$city', '$sourceOfJoining')";
 
-    if ($conn->query($sql) === TRUE) {
-
         if(mysqli_query($conn,$sql)){
             header("Location:volunteerdetails2.html");
             exit();
@@ -25,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
-}
+
 
 // Fetch existing volunteer data
 $sqlFetchData = "SELECT * FROM VolunteerDetails";

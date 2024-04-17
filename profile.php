@@ -500,7 +500,7 @@ include('fetch_data.php');
                 // Output data of each row
                 while ($row = $result->fetch_assoc()) {
                     // if($row['user_id'] == 3)
-                    echo "<tr><td>" . $row["id"]. "</td><td>" . $row["allotment_date"]. "</td><td>" . $row["task_details"]. "</td><td>" . $row["status"]. "</td></tr>";
+                    echo "<tr><td>" . $row["id"]. "</td><td>" . $row["allotment"]. "</td><td>" . $row["task_name"]. "</td><td>" . $row["status"]. "</td></tr>";
                 }
             } else {
                 echo "No tasks found";

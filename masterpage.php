@@ -285,8 +285,8 @@ include 'fetch_data.php';
                     if($registeredUser->num_rows>0)
                      while($user = $registeredUser->fetch_assoc()){ ?>
                     <tr role="row" class="row-1">
-                        <td data-label=" s.no"><a href="#" class="profileLink"><?php echo $user['user_id']?></a></td>
-                        <td class="name-cell" data-label=" name"><?php echo $user['name']?></td>
+                        <td data-label=" s.no"><a href="#" class="profileLink"><?php echo $user['id']?></a></td>
+                        <td class="name-cell" data-label=" name"><?php echo $user['first_name']?></td>
                         <td data-label=" coordinator name"><?php echo $user['coordinator']?></td>
                         <td data-label=" team name"><?php echo $user['teamname']?></td>
                         <td data-label=" status">backend-col-to-be</td>

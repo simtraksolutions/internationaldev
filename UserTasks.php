@@ -102,12 +102,15 @@
         <tbody>
 <?php
     if($task->num_rows > 0){
-        while($row = $task->fetch_assoc()){ echo $task->num_rows  ?>
+        while($row = $task->fetch_assoc()){  
+            //to check test if the query is working and fetching the correct data
+            // echo var_dump($row)
+        ?>
                     
           <tr>
             <td><?php echo $row['id']?></td>
             <td><?php echo $row['task_name']?></td>
-            <td><?php echo $row['action']?></td>
+            <td><?php echo $row['status']?></td>
             <td><?php echo $row['allotment']?></td>
             <td><?php echo $row['deadline']?></td>
             <td><?php echo $row['task_date']?></td>

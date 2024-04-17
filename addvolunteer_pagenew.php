@@ -74,10 +74,19 @@
 
         <form id="signupForm" action="addvolunteerform.php"   method="POST">
 
+        <?php
+        include('db_connect.php');
+        include('fetch_data.php');
+        ?>
 
             <label for="name" >Name</label>
             <select style="width: 330px; padding-top: 14px; padding-bottom: 14px; border-left: 2px solid black ; border-top:2px solid black; border-right: 2px solid grey; border-bottom: 2px solid grey; border-radius: 5px;" name="name" id="dog-names"> 
-                 <option value='Aishwarya'>Aishwarya</option>
+
+          <?php  if($registeredUser->num_rows > 0) {
+                while($row = $registeredUser->fetch_assoc()) {
+                    echo "<option value='".$row['id'].'.'.$row['first_name']."'>".$row['id'].'. '.$row['first_name']."</option>";
+                }}?>
+                 <!-- <option value='Aishwarya'>Aishwarya</option>
                  <option value='Kajal'>Kajal</option>
                  <option value='Amita'>Amita</option>
                  <option value='Pallavi'>Pallavi</option>
@@ -95,7 +104,7 @@
                  <option value='Competitive'>Competitive</option>
                  <option value='Translation'>Translation</option>
                  <option value='Collaboration'>Collaboration</option>
-     
+      -->
                </select>
 
 
@@ -143,7 +152,7 @@
 
 
             <label style="margin-top: 10px;" for="password" >Action</label>
-            <input type="text"  name="action"required>
+            <input type="text"  name="action" required>
 
 
             <label for="status" >Status:</label>
@@ -158,7 +167,7 @@
             </select>
 
             <label style="margin-top: 10px;" for="name" > Deadline:</label>
-            <input type="text"name="deadline" required>
+            <input type="date" name="deadline" required>
 
 
 

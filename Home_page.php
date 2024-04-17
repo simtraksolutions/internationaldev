@@ -413,7 +413,7 @@
         }
         //adding task for a particular volunteer
         function addVolunteerTask() {
-            window.location.href = "addvolunteer_pagenew.html";
+            window.location.href = "addvolunteer_pagenew.php";
         }
     </script>
 

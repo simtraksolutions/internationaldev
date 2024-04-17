@@ -1,30 +1,44 @@
+
+
+
 <?php
-// Database connection parameters
-include("db_connect.php");
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+    // Include your database connection script
+include 'db_connect.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve form data
-    $name = $_POST["name"];
-    $task_name = $_POST["task_name"];
-    $action = $_POST["action"];
-    $status = $_POST["status"];
+// Check if form is submitted
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Get form data
+    $name = $_POST['name'];
+     // Split the name into user ID and name
+     list($userId, $name) = explode('.', $name, 2);
+    $task_name = $_POST['task_name'];
+    $action = $_POST['action'];
+    $status = $_POST['status'];
+    $deadline = $_POST['deadline'];
 
-    // TODO: Validate and sanitize input data as needed
+    // Prepare an SQL statement
+    $sql = "INSERT INTO addvolunteer1 (user_id, name, task_name, action, status, deadline) VALUES (?, ?, ?, ?, ?, ?)";
+    // Initialize prepared statement
+    $stmt = $conn->prepare($sql);
 
-    // Insert data into the database
-    $sql = "INSERT INTO  addvolunteer( name,task_name, action, status) VALUES ( '$name', '$task_name', '$action', '$status')";
+    // Bind parameters to the prepared statement
+    $stmt->bind_param("ssssss",$userId, $name, $task_name, $action, $status, $deadline);
 
-    if ($conn->query($sql) === TRUE) {
-        echo "Record added successfully";
+    // Execute the prepared statement
+    if ($stmt->execute()) {
+        header("Location: Home_page.php");
+        echo "New record created successfully";
+
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
-    }
-} else {
-    // Redirect to the form page if accessed directly without submitting the form
-    header("Location: homepage.html");
-    exit();
-}
 
-// Close connection
-$conn->close();
+    }
+
+    // Close statement and connection
+    $stmt->close();
+    $conn->close();
+}
 ?>

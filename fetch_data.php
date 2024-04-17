@@ -16,7 +16,7 @@ if(isset($_GET['user_id']))
     $eduDetails = $conn->query($sql);
     
     //query to get the tasks of the user
-    $sql = "SELECT status FROM addvolunteer1 WHERE user_id = $userId";
+    $sql = "SELECT * FROM addvolunteer1 WHERE user_id = $userId";
     $task = $conn->query($sql);
 
    //test to if the query is working and fetching the correct data
