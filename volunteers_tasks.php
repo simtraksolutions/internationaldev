@@ -74,19 +74,22 @@
 
 <body>
     <!-- Top-Section Starts  -->
-
+<?php 
+    include('db_connect.php');
+    include('fetch_data.php');
+    ?>
     <section id="Tasks">
         <div class="container" style="margin-top: 60px;">
             <ul>
-                <li style="color: white; margin-right:10px;">
-                    <h1>Korlagunta pallavi</h1>
+                <li style="color: white; margin-right:10px; width: fit-content;">
+                    <h1><?php echo $name['first_name']?></h1>
                 </li>
                 <li>
                     <div class="btn btn-success" style="padding:5px; margin-top:10px; margin-left:10px; "><a href="http://127.0.0.1:5500/add_volunteer_form.html">Add Tasks</a></div>
                 </li>
 
-                <div class="search-container">
-                    <label style="color: white; margin-left:580px; margin-top:10px; ">
+                <div class="search-container" style="display: flex; width: 100%; justify-content: end;">
+                    <label style="color: white; margin-top:10px; ">
                         Search:
                         <input type="text" name="search" id="searchInput" onkeyup="filterTable()">
                     </label>
@@ -114,10 +117,16 @@
                 </tr>
             </thead>
             <tbody>
+                
+                
+            <?php
+                if($task->num_rows > 0){
+                    while($row = $task->fetch_assoc()){
+            ?>
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, inventore.
-                        <p><button style="border: 2px solid grey; padding: 1px; margin-top: 30px;" type="button" class="btn btn-secondary" disabled>ongoing</button> </p>
+                    <th scope="row" name="task-id"><?php echo $row['id']?></th>
+                    <td name = "volunteer-name"><?php echo $row['task_name']?>
+                        <p name = "status"><button style="border: 2px solid grey; padding: 1px; margin-top: 30px;" type="button" class="btn btn-secondary" disabled><?php echo $row['status']?></button> </p>
 
                     </td>
                     <td>
@@ -125,7 +134,7 @@
                         <div class="container mt-5">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                       <i class="ri-list-check-3"></i>
-                    </button>
+                            </button>
 
 
                             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -145,7 +154,7 @@
                                                     <label style="width: 450px; padding-top: 14px; padding-bottom: 14px; border-left: 2px solid black ; border-top:2px solid black; border-right: 2px solid grey; border-bottom: 2px solid grey; border-radius: 5px;" for="name">Ongoing</label>
                                                     <!-- <input type="text" required> -->
                                                     <!-- <label for="dog-names">Status:</label> -->
-                                                    <select style="width: 450px; padding-top: 14px; padding-bottom: 14px; border-left: 2px solid black ; border-top:2px solid black; border-right: 2px solid grey; border-bottom: 2px solid grey; border-radius: 5px;" name="dog-names" id="dog-names"> 
+                                                    <select style="width: 450px; padding-top: 14px; padding-bottom: 14px; border-left: 2px solid black ; border-top:2px solid black; border-right: 2px solid grey; border-bottom: 2px solid grey; border-radius: 5px;" name="task_status" id="task_status"> 
                                 <option>Just allotted</option> 
                                 <option >started</option>
                                 <option >under progress</option>
@@ -158,7 +167,7 @@
 
                                                 </div>
                                                 <br>
-                                                <a href="#" class="btn btn-primary">Submit</a>
+                                                <a href="#" class="btn btn-primary" id="change_status">Submit</a>
                                             </div>
                                         </div>
 
@@ -174,91 +183,11 @@
 
                     </td>
 
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
+                    <td name="alltoment-date"><?php echo $row['allotment']?></td>
+                    <td name="deadline"><?php echo $row['deadline']?></td>
+                    <td name="task-date"><?php echo $row['task_date']?></td>
                 </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob
-                        <p><button style="border: 2px solid grey; padding: 1px; margin-top: 30px; box-shadow: 2px solid;" type="button" class="btn btn-secondary" disabled>ongoing</button> </p>
-                    </td>
-
-                    <td>
-
-                        <div class="container mt-5">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    <i class="ri-list-check-3"></i>
-                  </button>
-
-
-                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Popup Title</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times</span>
-                          </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            hello world.
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </td>
-
-
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>lorem
-                        <p><button style="border: 2px solid grey; padding: 1px; margin-top: 30px;" type="button" class="btn btn-secondary" disabled>ongoing</button> </p>
-                    </td>
-
-                    <td>
-
-                        <div class="container mt-5">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    <i class="ri-list-check-3"></i>
-                  </button>
-
-
-                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Popup Title</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times</span>
-                          </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            hello world.
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </td>
-
-                    <td>@twitter</td>
-                    <td>@twitter</td>
-                    <td>@twitter</td>
-                </tr>
+            <?php }}?>
             </tbody>
         </table>
     </div>
@@ -303,6 +232,40 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+
+    <script>
+        //get all the table rows
+        const rows = document.querySelectorAll('tr');
+        let click = true;
+        //add event listener to each row
+        rows.forEach(row => {
+            row.addEventListener('click', function(e) {
+                e.preventDefault();
+                if(!click){ return; }
+                const task_id = row.querySelector('[name="task-id"]').textContent;
+                console.log(task_id+"   "+task_status);
+                click = false;
+                
+                //change the task status
+                const status = document.getElementById('change_status');
+                status.addEventListener('click', function() {
+                    //send the task status to the server
+                    click = true;
+                    const task_status = document.getElementById('task_status').value;
+            changeTaskStatus(task_status, task_id);
+        });
+
+                
+            });
+        });
+    </script>
+
+    <script>
+        function changeTaskStatus(task_status, task_id) {
+            window.location.href = `changeStatus.php?status=${task_status}&task_id=${task_id}&user_id=<?php echo $userId ?>`;
+        }
+    </script>
 </body>
 
 </html>

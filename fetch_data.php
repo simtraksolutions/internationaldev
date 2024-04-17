@@ -18,6 +18,9 @@ if(isset($_GET['user_id']))
     //query to get the tasks of the user
     $sql = "SELECT * FROM addvolunteer1 WHERE user_id = $userId";
     $task = $conn->query($sql);
+    $name = "SELECT first_name FROM volunteerdetails WHERE id = $userId";
+    $name = $conn->query($name);
+    $name = $name->fetch_assoc();
 
    //test to if the query is working and fetching the correct data
 

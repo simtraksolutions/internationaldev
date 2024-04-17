@@ -603,7 +603,7 @@ tableRows.forEach((row) => {
 
 //javascript function to redirect the user to the task page
         function loadTasks(volunteerId) {
-            location.href = './UserTasks.php?user_id=' + volunteerId;
+            location.href = './volunteers_tasks.php?user_id=' + volunteerId;
         }
     </script>
 
