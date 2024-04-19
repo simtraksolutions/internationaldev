@@ -132,7 +132,7 @@
                     <td>
 
                         <div class="container mt-5">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                            <button type="button" id="task-btn" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-key="<?php echo $row['id']?>">
                       <i class="ri-list-check-3"></i>
                             </button>
 
@@ -235,30 +235,21 @@
 
 
     <script>
-        //get all the table rows
-        const rows = document.querySelectorAll('tr');
-        let click = true;
-        //add event listener to each row
-        rows.forEach(row => {
-            row.addEventListener('click', function(e) {
-                e.preventDefault();
-                if(!click){ return; }
-                const task_id = row.querySelector('[name="task-id"]').textContent;
-                console.log(task_id+"   "+task_status);
-                click = false;
-                
-                //change the task status
-                const status = document.getElementById('change_status');
-                status.addEventListener('click', function() {
-                    //send the task status to the server
-                    click = true;
-                    const task_status = document.getElementById('task_status').value;
-            changeTaskStatus(task_status, task_id);
-        });
+       
+//change the task status
+        const status = document.querySelectorAll('#task-btn');
+                status.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const task_id = btn.getAttribute('data-key');
+                        console.log(task_id);
+                        const status = document.getElementById('change_status');
+                        status.addEventListener('click', function() {
+                            const task_status = document.getElementById('task_status').value;
+                            changeTaskStatus(task_status, task_id);
+                        });
+                    });
+                });
 
-                
-            });
-        });
     </script>
 
     <script>
