@@ -19,9 +19,6 @@
             /*background-image: url(https://media.istockphoto.com/id/1419766496/photo/abstract-concepts-of-cybersecurity-technology-and-digital-data-protection-protect-internet.webp?b=1&s=612x612&w=0&k=20&c=mMG_-IOsy9IOupqSDvEbeqduD-LGZ3bBp1fZ5pXoIwA=);
             /*background-image: url(https://www.imageshine.in/uploads/gallery/Free-photo-abstract-luxury-gradient-blue-Wallpaper-Free-Download.jpg);*/
             font-family: Arial, sans-serif;
-            /* make background image cover the entire scrren */
-            background-size: cover;
-
         }
         
         #sidebar {
@@ -116,7 +113,8 @@
         }
         
         .container {
-            background-color: #f4f4f4;
+            /*background-color: #f4f4f4;*/
+            background-color: white;
             /*background-image: url(https://www.imageshine.in/uploads/gallery/Free-photo-abstract-luxury-gradient-blue-Wallpaper-Free-Download.jpg);*/
             padding: 20px;
             margin-top: 20px;
@@ -142,7 +140,7 @@
         .table th {
             height: 30px;
             padding: 12px 15px;
-            border: 1px solid #ddd;
+            border: 1px solid white;
             text-align: center;
             font-size: 16px;
         }
@@ -150,9 +148,17 @@
         .table th {
             color: #241c1c;
         }
+        /* Apply background color to even rows */
         
         .table tbody tr:nth-child(even) {
-            background-color: rgb(235, 240, 240);
+            background-color: #f9f9f9 !important;
+            /* Add !important */
+        }
+        /* Apply background color to odd rows */
+        
+        .table tbody tr:nth-child(odd) {
+            background-color: #f0eded !important;
+            /* Add !important */
         }
         
         .button {
@@ -169,15 +175,6 @@
             margin-bottom: 15px;
             cursor: pointer;
         }
-        /*styling for popup
-        
-        .userinputs {
-            justify-content: center;
-            /*padding: 0px;*
-            font-size: 20px;
-            border-color: black;
-            display: absolute;
-        }*/
         
         .popup {
             display: none;
@@ -321,22 +318,6 @@
 
             <a href="http://127.0.0.1:5500/add_volunteer_form.html" class="button" onclick="addVolunteerTask()">Add Task</a>
 
-            <!--<a href="#" class="button" id="Add task" onclick="openPopup()">Add Task</a> /// by this add volunteer button acts as an popup
-
-
-            !--<a href="#" class="button" id="Add task" onclick="openPopup()">Add task </a> ///by this an oter button will be displayed for popup of adding task-->
-
-            <!--<label><div class="search_button" style="float: right"> Search: 
-                <input type="text" name="search"  id="volunteer_task" onkeyup="filterFunction()" style="float:right">
-                </div>
-            </label>-->
-
-            <!--<label>   for now
-                <div class="search_button" style="float: right"> Search: 
-                    <input type="text" name="search" id="searchInput" onkeyup="filterTable()" style="float:right">
-                </div>
-            </label>-->
-
             <div class="search-container">
                 <label>
                     Search:
@@ -344,7 +325,8 @@
                 </label>
             </div>
             <br>
-            <br>
+            <hr>
+
 
             <div id="popup-container" class="popup">
                 <div class="popup-content">
@@ -380,7 +362,7 @@
                 <tbody>
                     <tr role="row" class="row-1">
                         <td data-label=" s.no"><a href="http://127.0.0.1:5500/profile.html">32565</a></td>
-                        <td data-label=" name">prachi</td>
+                        <td data-label=" name"><a href="http://127.0.0.1:5500/volunteers_tasks.html">prachi</a></td>
                         <td data-label=" task">
                             <button type="button" class="btn btn-outline-primary"><a href="http://127.0.0.1:5500/volunteers_tasks.html"><i class="ri-list-check-3"></i></a></button>
                         </td>
@@ -388,7 +370,110 @@
                         <td data-label=" status">Active</td>
                         <!--<td data-label="  "></td>-->
                     </tr>
-                   
+                    <tr>
+                        <td width="auto" data-label=" s.no"><a href="http://127.0.0.1:5500/profile.html">66657</a></td>
+                        <td data-label=" name"><a href="http://127.0.0.1:5500/volunteers_tasks.html">ananya</a></td>
+                        <td data-label=" task">
+                            <button type="button" class="btn btn-outline-primary"><a href="http://127.0.0.1:5500/volunteers_tasks.html"><i class="ri-list-check-3"></i></a></button>
+                        </td>
+                        <td data-label=" action"></td>
+                        <td data-label=" status">Active</td>
+                        <!--<td data-label="  "></td>-->
+                    </tr>
+                    <tr>
+                        <td width="auto" data-label=" s.no"><a href="http://127.0.0.1:5500/profile.html">68457</a></td>
+                        <td data-label=" name"><a href="http://127.0.0.1:5500/volunteers_tasks.html">riya</a></td>
+                        <td data-label=" task">
+                            <button type="button" class="btn btn-outline-primary"><a href="http://127.0.0.1:5500/volunteers_tasks.html"><i class="ri-list-check-3"></i></a></button>
+                        </td>
+                        <td data-label=" action"></td>
+                        <td data-label=" status">progressive</td>
+                        <!--<td data-label="  "></td>-->
+                    </tr>
+                    <tr>
+                        <td width="auto" data-label=" s.no"><a href="http://127.0.0.1:5500/profile.html">68667</a></td>
+                        <td data-label=" name"><a href="http://127.0.0.1:5500/volunteers_tasks.html">karthik</a></td>
+                        <td data-label=" task">
+                            <button type="button" class="btn btn-outline-primary"><a href="http://127.0.0.1:5500/volunteers_tasks.html"><i class="ri-list-check-3"></i></a></button>
+                        </td>
+                        <td data-label=" action"></td>
+                        <td data-label=" status">Dormant</td>
+                        <!--<td data-label="  "></td>-->
+                    </tr>
+                    <tr>
+                        <td width="auto" data-label=" s.no"><a href="http://127.0.0.1:5500/profile.html">68667</a></td>
+                        <td data-label=" name"><a href="http://127.0.0.1:5500/volunteers_tasks.html">karthik</a></td>
+                        <td data-label=" task">
+                            <button type="button" class="btn btn-outline-primary"><a href="http://127.0.0.1:5500/volunteers_tasks.html"><i class="ri-list-check-3"></i></a></button>
+                        </td>
+                        <td data-label=" action"></td>
+                        <td data-label=" status"></td>
+                        <!--<td data-label="  "></td>-->
+                    </tr>
+                    <tr>
+                        <td width="auto" data-label=" s.no"><a href="http://127.0.0.1:5500/profile.html">68667</a></td>
+                        <td data-label=" name"><a href="http://127.0.0.1:5500/volunteers_tasks.html">pranav</a></td>
+                        <td data-label=" task">
+                            <button type="button" class="btn btn-outline-primary"><a href="http://127.0.0.1:5500/volunteers_tasks.html"><i class="ri-list-check-3"></i></a></button>
+                        </td>
+                        <td data-label=" action"></td>
+                        <td data-label=" status">progressive</td>
+                        <!--<td data-label="  "></td>-->
+                    </tr>
+                    <tr>
+                        <td width="auto" data-label=" s.no"><a href="http://127.0.0.1:5500/profile.html">66657</a></td>
+                        <td data-label=" name"><a href="http://127.0.0.1:5500/volunteers_tasks.html">ananya</a></td>
+                        <td data-label=" task">
+                            <button type="button" class="btn btn-outline-primary"><a href="http://127.0.0.1:5500/volunteers_tasks.html"><i class="ri-list-check-3"></i></a></button>
+                        </td>
+                        <td data-label=" action"></td>
+                        <td data-label=" status">Active</td>
+                        <!--<td data-label="  "></td>-->
+                    </tr>
+                    <tr>
+                        <td width="auto" data-label=" s.no"><a href="http://127.0.0.1:5500/profile.html">66657</a></td>
+                        <td data-label=" name"><a href="http://127.0.0.1:5500/volunteers_tasks.html">raju</a></td>
+                        <td data-label=" task">
+                            <button type="button" class="btn btn-outline-primary"><a href="http://127.0.0.1:5500/volunteers_tasks.html"><i class="ri-list-check-3"></i></a></button>
+                        </td>
+                        <td data-label=" action"></td>
+                        <td data-label=" status">Active</td>
+                        <!--<td data-label="  "></td>-->
+                    </tr>
+                    <tr>
+                        <td width="auto" data-label=" s.no"><a href="http://127.0.0.1:5500/profile.html">66657</a></td>
+                        <td data-label=" name"><a href="http://127.0.0.1:5500/volunteers_tasks.html">ani</a></td>
+                        <td data-label=" task">
+                            <button type="button" class="btn btn-outline-primary"><a href="http://127.0.0.1:5500/volunteers_tasks.html"><i class="ri-list-check-3"></i></a></button>
+                        </td>
+                        <td data-label=" action"></td>
+                        <td data-label=" status">Active</td>
+                        <!--<td data-label="  "></td>-->
+                    </tr>
+                    <tr>
+                        <td width="auto" data-label=" s.no"><a href="http://127.0.0.1:5500/profile.html">66657</a></td>
+                        <td data-label=" name"><a href="http://127.0.0.1:5500/volunteers_tasks.html">manya</a></td>
+                        <td data-label=" task">
+                            <button type="button" class="btn btn-outline-primary"><a href="http://127.0.0.1:5500/volunteers_tasks.html"><i class="ri-list-check-3"></i></a></button>
+                        </td>
+                        <td data-label=" action"></td>
+                        <td data-label=" status">Active</td>
+                        <!--<td data-label="  "></td>-->
+                    </tr>
+                    <tr>
+                        <td width="auto" data-label=" s.no"><a href="http://127.0.0.1:5500/profile.html">66657</a></td>
+                        <td data-label=" name"><a href="http://127.0.0.1:5500/volunteers_tasks.html">ananya</a></td>
+                        <td data-label=" task">
+                            <button type="button" class="btn btn-outline-primary"><a href="http://127.0.0.1:5500/volunteers_tasks.html"><i class="ri-list-check-3"></i></a></button>
+                        </td>
+                        <td data-label=" action"></td>
+                        <td data-label=" status">Active</td>
+                        <!--<td data-label="  "></td>-->
+                    </tr>
+
+
+
+
                 </tbody>
             </table>
 
