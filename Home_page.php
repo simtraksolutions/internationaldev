@@ -409,11 +409,11 @@
     <script>
         //adding volunteer
         function addVolunteer() {
-            window.location.href = "volunteer_details-1.php";
+            window.location.href = "volunteer_details-1.php?loc=Home_page";
         }
         //adding task for a particular volunteer
         function addVolunteerTask() {
-            window.location.href = "addvolunteer_pagenew.php";
+            window.location.href = "addvolunteer_pagenew.php?loc=Home_page";
         }
     </script>
 

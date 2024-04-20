@@ -184,7 +184,6 @@ if (isset($_SESSION["name"]) && !empty($_SESSION["name"])) {
 
   }
 
-
 ?>
 <body>
     <section class="container">

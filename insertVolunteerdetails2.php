@@ -13,6 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "INSERT INTO volunteer_details_two(college, course, linkedin, facebook) VALUES ('$college', '$course', '$linkedin', '$facebook')";
 
     if(mysqli_query($conn,$sql)){
+            
             header("Location: Home_page.php");
             exit();
           

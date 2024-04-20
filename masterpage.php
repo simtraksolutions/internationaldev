@@ -71,7 +71,7 @@ include 'fetch_data.php';
             padding: 20px;
             margin-top: 20px;
             overflow-x: auto;
-            max-height: 500px;
+            max-height: 700px;
             max-width: 1400px;
             overflow-y: auto;
             border-radius: 3px;
@@ -303,11 +303,11 @@ include 'fetch_data.php';
         <script>
         //adding volunteer
         function addVolunteer() {
-            window.location.href = "volunteer_details-1.php";
+            window.location.href = "volunteer_details-1.php?loc=masterpage";
         }
         //adding task for a particular volunteer
         function addVolunteerTask() {
-            window.location.href = "addvolunteer_pagenew.html";
+            window.location.href = "addvolunteer_pagenew.php?loc=masterpage";
         }
     </script>
 

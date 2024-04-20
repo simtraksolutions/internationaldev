@@ -63,7 +63,7 @@
             padding: 20px;
             margin-top: 20px;
             overflow-x: auto;
-            max-height: 500px;
+            max-height: 700px;
             max-width: 1400px;
             overflow-y: auto;
             border-radius: 3px;
@@ -198,9 +198,9 @@
 
         <div class="container">
 
-            <a href="http://127.0.0.1:5500/volunteer%20details-1.html" class="button" onclick="addVolunteer()">Add Volunteer</a>
+            <a  class="button" onclick="addVolunteer()">Add Volunteer</a>
 
-            <a href="http://127.0.0.1:5500/add_volunteer_form.html" class="button" onclick="addVolunteerTask()">Add Task</a>
+            <a  class="button" onclick="addVolunteerTask()">Add Task</a>
 
 
 
@@ -254,39 +254,21 @@
 
                 </thead>
                 <tbody>
+                    <?php 
+                    include("db_connect.php");
+                    include("fetch_data.php");
+                    if($registeredUser->num_rows>0){
+                     while($user = $registeredUser->fetch_assoc()){                                        
+                        ?>
                     <tr role="row" class="row-1">
-                        <td data-label=" s.no"><a href="http://127.0.0.1:5500/profile.html">32565</a></td>
-                        <td data-label=" name"><a href="http://127.0.0.1:5500/volunteers_tasks.html">Prachi</a></td>
-                        <td data-label=" coordinator name"></td>
-                        <td data-label=" team name"></td>
-                        <td data-label=" status">Active</td>
+                        <td data-label=" s.no"><a href="#" class="profileLink"><?php echo $user['id']?></a></td>
+                        <td class="name-cell" data-label=" name"><?php echo $user['first_name']?></td>
+                        <td data-label=" coordinator name"><?php echo $user['coordinator']?></td>
+                        <td data-label=" team name"><?php echo $user['teamname']?></td>
+                        <td data-label=" status">backend-col-to-be</td>
                         <!--<td data-label="  "></td>-->
                     </tr>
-                    <tr>
-                        <td width="auto" data-label=" s.no"><a href="http://127.0.0.1:5500/profile.html">66657</a></td>
-                        <td data-label=" name"><a href="http://127.0.0.1:5500/volunteers_tasks.html">ananya</a></td>
-                        <td data-label=" coordinator name"></td>
-                        <td data-label=" team name"></td>
-                        <td data-label=" status">Active</td>
-                        <!--<td data-label="  "></td>-->
-                    </tr>
-                    <tr>
-                        <td width="auto" data-label=" s.no"><a href="http://127.0.0.1:5500/profile.html">68457</a></td>
-                        <td data-label=" name"><a href="http://127.0.0.1:5500/volunteers_tasks.html">riya</a></td>
-                        <td data-label=" coordinator name"></td>
-                        <td data-label=" team name"></td>
-                        <td data-label=" status">progressive</td>
-                        <!--<td data-label="  "></td>-->
-                    </tr>
-                    <tr>
-                        <td width="auto" data-label=" s.no"><a href="http://127.0.0.1:5500/profile.html">68667</a></td>
-                        <td data-label=" name"><a href="http://127.0.0.1:5500/volunteers_tasks.html">karthik</a></td>
-                        <td data-label=" coordinator name"></td>
-                        <td data-label=" team name"></td>
-                        <td data-label=" status">Dormant</td>
-                        <!--<td data-label="  "></td>-->
-                    </tr>
-
+                    <?php }} ?>
 
                 </tbody>
             </table>
@@ -294,7 +276,19 @@
 
         </div>
     </div>
+
     <script>
+        //adding volunteer
+        function addVolunteer() {
+            window.location.href = "volunteer_details-1.php?loc=Admin_page";
+        }
+        //adding task for a particular volunteer
+        function addVolunteerTask() {
+            window.location.href = "addvolunteer_pagenew.php?loc=Admin_page";
+        }
+    </script>
+
+    <!-- <script>
         function addVolunteerTask() {
             var table = document.getElementById("volunteer_tasktable").getElementsByTagName('tbody')[0];
             var newRow = table.insertRow(table.rows.length);
@@ -316,7 +310,7 @@
             cell5.innerHTML = ""; // Status
             // cell6.innerHTML = "";
         }
-    </script>
+    </script> -->
 
 
 
@@ -374,6 +368,27 @@
         }
     </script>
 
+    <script>
+            //collect the userIDs from the table and redirect the user to the profile page
+            // Get all anchor elements with the class "profileLink"
+            const anchorElements = document.querySelectorAll('.profileLink');
+
+            // Add a click event listener to each anchor tag
+            anchorElements.forEach((anchor) => {
+            anchor.addEventListener('click', (e) => {
+                e.preventDefault();
+                const userId = anchor.textContent;
+                loadProfile(userId);
+            });
+        });
+
+
+            //Javascritp function to redirect the user to the profile page
+            function loadProfile(volunteerId) {
+
+        location.href = './profile.php?user_id=' + volunteerId ;
+        }
+        </script>
 
 
 </body>
