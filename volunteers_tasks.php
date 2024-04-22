@@ -254,6 +254,8 @@
 
     <script>
         function changeTaskStatus(task_status, task_id) {
+            if(task_status == "Purged/Cancelled")
+            task_status = "cancelled";
             window.location.href = `changeStatus.php?status=${task_status}&task_id=${task_id}&user_id=<?php echo $userId ?>`;
         }
     </script>

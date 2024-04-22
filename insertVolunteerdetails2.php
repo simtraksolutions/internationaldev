@@ -1,5 +1,16 @@
 <?php
 include("db_connect.php");
+
+if(isset($_GET['check'])){
+    //insert empty values into the database
+    $sql = "INSERT INTO volunteer_details_two(college, course, linkedin, facebook) VALUES ('N/A', 'N/A', 'N/A', 'N/A')";
+    if(mysqli_query($conn,$sql)){
+        header("Location: Home_page.php");
+        exit();
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+}
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
