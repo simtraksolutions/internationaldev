@@ -1,20 +1,22 @@
 
 <?php
+
+ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
 include("db_connect.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Collect form data
     $name = mysqli_real_escape_string($conn, $_POST['name']);
+    $coordinator = mysqli_real_escape_string($conn, $_POST['coordinator']);
     $teamname = mysqli_real_escape_string($conn, $_POST['teamname']);
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $password = mysqli_real_escape_string($conn, $_POST['password']);
 
-
+    
     // Your SQL query to insert data into the database
-    $sql = "INSERT INTO registration (name, teamname, email, password) VALUES ('$name', '$teamname', '$email', '$password')";
-
-    // if (mysqli_query($conn, $sql)) {
-        // echo "Record added successfully";
+    $sql = "INSERT INTO registration (name, coordinator, teamname, email, password) VALUES ('$name','$coordinator', '$teamname', '$email', '$password')";
         if(mysqli_query($conn,$sql)){
             header("Location: Home_page.php");
             exit();
