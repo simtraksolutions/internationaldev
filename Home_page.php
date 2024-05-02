@@ -393,7 +393,7 @@
                             <button type="button" class="btn btn-outline-primary"><a href="#" onclick="loadTasks(userId)"><i class="ri-list-check-3"></i></a></button>
                         </td>
                         <td data-label=" action">yet-to-connect</td>
-                        <td data-label=" status">doubt-to-resolve</td>
+                        <td data-label=" status"><?php echo $row['status']?></td>
                         <!--<td data-label="  "></td>-->
                     </tr>
 
