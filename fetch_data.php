@@ -75,4 +75,3 @@ if(isset($_GET['user_id']))
 }
 
 ?>
-<?php include('closeConnection.php'); ?>
