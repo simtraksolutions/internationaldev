@@ -286,7 +286,7 @@ include('fetch_data.php');
                         </div>
                         <div class="container12">
                             <div class="rrow">
-                            <a href="#" id="status" class="button">backend-yet-to-connect</a>
+                            <a href="#" id="status" class="button"><?php echo $personal['status']?></a>
                             </div>
                         </div>
                     </div>
@@ -521,8 +521,8 @@ include('fetch_data.php');
            //show the status of the user 
        
     const statusButton = document.getElementById('status');
-    if (statusButton.textContent.trim() === 'dormant') statusButton.classList.add('button_dormant');
-    else if (statusButton.textContent.trim() === 'suspended') statusButton.classList.add('button_suspend');
+    if (statusButton.textContent.trim() === 'Dormant') statusButton.classList.add('button_dormant');
+    else if (statusButton.textContent.trim() === 'Suspended') statusButton.classList.add('button_suspend');
 
     // Function to handle photo upload and preview 
         const photoUpload = document.getElementById('photo-upload');
