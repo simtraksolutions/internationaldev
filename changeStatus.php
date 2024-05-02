@@ -18,4 +18,7 @@ error_reporting(E_ALL);
             echo "Error updating record: " . $conn->error;
         }
     }
+
+include('closeConnection.php'); 
+
 ?>

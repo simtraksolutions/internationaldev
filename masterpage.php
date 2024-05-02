@@ -471,7 +471,7 @@ include 'fetch_data.php';
     </script>
 
 
-
+<?php include('closeConnection.php'); ?>
 
 </body>
 

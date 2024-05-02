@@ -551,6 +551,9 @@ const userId = <?php echo $personal['id']?>;
 location.href = window.location.pathname + '?task_status=' + status +'&user_id=' + userId;}
     </script>
 
+
+<?php include('closeConnection.php'); ?>
+
 </body>
 
 </html>

@@ -548,6 +548,7 @@ if (isset($_SESSION["name"]) && !empty($_SESSION["name"])) {
     </script>
 
 
+<?php include('closeConnection.php'); ?>
 
 
 

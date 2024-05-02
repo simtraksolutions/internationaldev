@@ -177,6 +177,9 @@
             <br>
 
         </form>
+
+<?php include('closeConnection.php'); ?>
+
 </body>
 
 </html>

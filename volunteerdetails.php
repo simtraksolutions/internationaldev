@@ -259,7 +259,8 @@ $result = $conn->query($sql);
         </form>
         
     </section>
-   
+
+<?php include('closeConnection.php'); ?>
 
 </script>
 

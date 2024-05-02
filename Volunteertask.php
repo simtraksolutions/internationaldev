@@ -299,6 +299,9 @@ $conn->close();
                 }
             }
         }
+
+<?php include('closeConnection.php'); ?>
+
     </script>
 
 

@@ -607,6 +607,7 @@ tableRows.forEach((row) => {
         }
     </script>
 
+<?php include('closeConnection.php'); ?>
 
 
 </body>

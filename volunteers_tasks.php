@@ -259,6 +259,9 @@
             window.location.href = `changeStatus.php?status=${task_status}&task_id=${task_id}&user_id=<?php echo $userId ?>`;
         }
     </script>
+
+<?php include('closeConnection.php'); ?>
+
 </body>
 
 </html>

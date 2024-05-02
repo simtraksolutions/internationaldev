@@ -74,5 +74,5 @@ if(isset($_GET['user_id']))
     $result = $conn->query($task_query);
 }
 
-$conn->close();
 ?>
+<?php include('closeConnection.php'); ?>
