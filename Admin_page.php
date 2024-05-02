@@ -262,11 +262,14 @@
                         // take user email and fetch the coordinator name and team name from the registration table
                         $email = $user['email'];
                         $sql = "SELECT * FROM registration WHERE email = '$email'";
-                        if($result->num_rows>0 && $result = $conn->query($sql)){
-                            $result = $result->fetch_assoc();}
-                        else{
+                        if($conn->query($sql)){
+                            $result = $conn->query($sql);
+                            $result = $result->fetch_assoc();
+                            
+                            if($result == null)
                             $result = array('coordinator'=>'N/A','teamname'=>'N/A');
                         }
+                       
                         ?>
                     <tr role="row" class="row-1">
                         <td data-label=" s.no"><a href="#" class="profileLink"><?php echo $user['id']?></a></td>
@@ -398,6 +401,7 @@
         }
         </script>
 
+<?php include('closeConnection.php'); ?>
 
 </body>
 
