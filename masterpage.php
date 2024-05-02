@@ -282,17 +282,29 @@ include 'fetch_data.php';
                 </thead>
                 <tbody>
                 <?php 
-                    if($registeredUser->num_rows>0)
-                     while($user = $registeredUser->fetch_assoc()){ ?>
+                   if($registeredUser->num_rows>0){
+                    while($user = $registeredUser->fetch_assoc()){ 
+                       // take user email and fetch the coordinator name and team name from the registration table
+                       $email = $user['email'];
+                       $sql = "SELECT * FROM registration WHERE email = '$email'";
+                       if($conn->query($sql)){
+                           $result = $conn->query($sql);
+                           $result = $result->fetch_assoc();
+                           
+                           if($result == null)
+                           $result = array('coordinator'=>'N/A','teamname'=>'N/A');
+                       }
+                      
+                    ?>
                     <tr role="row" class="row-1">
                         <td data-label=" s.no"><a href="#" class="profileLink"><?php echo $user['id']?></a></td>
                         <td class="name-cell" data-label=" name"><?php echo $user['first_name']?></td>
-                        <td data-label=" coordinator name"><?php echo $user['coordinator']?></td>
-                        <td data-label=" team name"><?php echo $user['teamname']?></td>
-                        <td data-label=" status">backend-col-to-be</td>
+                        <td data-label=" coordinator name"><?php echo $result['coordinator']?></td>
+                        <td data-label=" team name"><?php echo $result['teamname']?></td>
+                        <td data-label=" status"><?php echo $user['status']?></td>
                         <!--<td data-label="  "></td>-->
                     </tr>        
-                <?php }?>
+                <?php }}?>
                 </tbody>
             </table>
 
@@ -472,6 +484,7 @@ include 'fetch_data.php';
 
 
 <?php include('closeConnection.php'); ?>
+
 
 </body>
 
