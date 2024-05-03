@@ -409,7 +409,7 @@ include('fetch_data.php');
                         </div>
                         <div class="container12">
                             <div class="rrow">
-                            <label><?php echo $edu['college']?></label>
+                            <label><?php echo isset($edu['college']) ? $edu['college'] : 'N/A'; ?></label>
                             </div>
                         </div>
                     </div>
@@ -424,7 +424,7 @@ include('fetch_data.php');
                         </div>
                         <div class="container12">
                             <div class="rrow">
-                            <label><?php echo $edu['course']?></label>
+                            <label><?php echo isset($edu['course']) ? $edu['course'] : 'N/A'; ?></label>
                             </div>
                         </div>
                     </div>
@@ -439,7 +439,7 @@ include('fetch_data.php');
                         </div>
                         <div class="container12">
                             <div class="rrow">
-                            <label><?php echo $edu['facebook']?></label>
+                            <label><?php echo isset($edu['facebook']) ? $edu['facebook'] : 'N/A'; ?></label>
                             </div>
                         </div>
                     </div>
@@ -454,7 +454,7 @@ include('fetch_data.php');
                         </div>
                         <div class="container12">
                             <div class="rrow">
-                            <label><?php echo $edu['linkedin']?></label>
+                            <label><?php echo isset($edu['linkedin']) ? $edu['linkedin'] : 'N/A'; ?></label>
                             </div>
                         </div>
                     </div>
