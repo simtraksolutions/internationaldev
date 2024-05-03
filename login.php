@@ -20,7 +20,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 setcookie("email", $row["email"], time() + (86400 * 30), "/"); // 30 days
             }
 
-            header("Location: Home_page.php");
+            //fetch the user id from the database and redirect the user to it's profile page
+            $sql = "SELECT id FROM volunteerdetails WHERE email='$email'";
+            $result = mysqli_query($conn, $sql);
+            $result = mysqli_fetch_assoc($result);
+            $user_id = $result['id'];
+            header("Location: ./profile.php?user_id={$user_id}");
             exit();
         } else {
             // Invalid password
