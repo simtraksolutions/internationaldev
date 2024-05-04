@@ -14,7 +14,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign up</title>
+    <title>Volunteer Task form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -38,19 +39,19 @@
         }
         
         label {
-            width: 100%;
             display: block;
-            margin-bottom: 2px;
+            margin-bottom: 8px;
         }
         
-        input {
+        input,
+        select {
             width: 100%;
             padding: 10px;
             font-size: medium;
+            border: 1px solid #ccc;
             border-radius: 4px;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             box-sizing: border-box;
-            cursor: pointer;
         }
         
         button {
@@ -60,10 +61,17 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            width: 100%;
         }
         
         button:hover {
             background-color: #45a049;
+        }
+        /* Additional style for "other" input */
+        
+        .other-input {
+            display: none;
+            /* Initially hide the "other" input */
         }
     </style>
 </head>
@@ -72,7 +80,7 @@
 
     <div class="container">
 
-        <form id="signupForm" action="addvolunteerform.php"   method="POST">
+        <form id="signupForm" action="insertvolunteertask.php"   method="POST">
 
         <?php
         include('db_connect.php');
@@ -80,38 +88,21 @@
         ?>
 
             <label for="name" >Name</label>
-            <select style="width: 330px; padding-top: 14px; padding-bottom: 14px; border-left: 2px solid black ; border-top:2px solid black; border-right: 2px solid grey; border-bottom: 2px solid grey; border-radius: 5px;" name="name" id="dog-names"> 
-
+            <select name="name" id="nameSelect" onchange="toggleOtherInput('nameSelect', 'nameOther')">
+            <option value="task0"></option>  
+            <option value="other">Other</option>
           <?php  if($registeredUser->num_rows > 0) {
                 while($row = $registeredUser->fetch_assoc()) {
-                    echo "<option value='".$row['id'].'.'.$row['first_name']."'>".$row['id'].'. '.$row['first_name']."</option>";
+                    echo "<option value='".$row['id'].'.'.$row['first_name']."'>".$row['first_name']."</option>";
                 }}?>
-                 <!-- <option value='Aishwarya'>Aishwarya</option>
-                 <option value='Kajal'>Kajal</option>
-                 <option value='Amita'>Amita</option>
-                 <option value='Pallavi'>Pallavi</option>
-                 <option value='Rupak'>Rupak</option>
-                 <option value='Jadeja'>Jadeja </option>
-                 <option value='Vipul'>Vipul</option>
-                 <option value='Summit'>Summit</option>
-                 <option value='Neha'>Neha</option>
-                 <option value='Nitish'>Nitish</option>
-                 <option value='Sachin'>Sachin</option>
-                 <option value='soniya'>soniya</option>
-                 <option value='kittu'>kittu</option>
-                 <option value='Rahul'>Rahul</option>
-                 <option value='Fun'>Fun</option>
-                 <option value='Competitive'>Competitive</option>
-                 <option value='Translation'>Translation</option>
-                 <option value='Collaboration'>Collaboration</option>
-      -->
-               </select>
+            </select>
+            <input type="text" id="nameOther" name="nameOther" class="other-input" placeholder="Enter name">
 
 
-
-            <label for="dog-names"  >Task Name:</label>
-            <select style="width: 330px; padding-top: 14px; padding-bottom: 14px; border-left: 2px solid black ; border-top:2px solid black; border-right: 2px solid grey; border-bottom: 2px solid grey; border-radius: 5px;" name="task_name" id="dog-names"> 
+            <label for="task"  >Task Name:</label>
+            <select name="task" id="taskSelect" onchange="toggleOtherInput('taskSelect', 'taskOther')">
                 <option value="task0"></option>
+                <option value="other">Other</option>
                 <option value="1 Article-own">1 Article-own</option>
                 <option value="1 webinar-own">1 webinar-own</option>
                 <option value="5 Articles">5 Articles</option>
@@ -123,32 +114,8 @@
                 <option value="Centre onboarding">Centre onboarding</option>
                 <option value="Social survey-issues/traning">Social survey-issues/traning</option>
                 <option value="Wisetalk">Wisetalk</option>
-                <option value="Empathee">Empathee</option>
-                <option value="Gypse">Gypse</option>
-                <option value="Synergy">Synergy</option>
-                <option value="Interesting educational module">Interesting educational module</option>
-                <option value="Young leader-college">Young leader-college</option>
-                <option value="Workshops organise">Workshops organise</option>
-                <option value="Wisetalk(translation)-q/a">Wisetalk(translation)-q/a</option>
-                <option value="Global Indian">Global Indian</option>
-                <option value="Inspirit">Inspirit</option>
-                <option value="Spring">Spring</option>
-                <option value="Prograce:career">Prograce:career</option>
-                <option value="Coding Workshop">Coding Workshop</option>
-                <option value="Sunshine offline">Sunshine offline</option>
-                <option value="Fun n learn">Fun n learn</option>
-                <option value="Competitive exam/logical">Competitive exam/logical</option>
-                <option value="IELTS(classes)">IELTS(classes)</option>
-                <option value="Translation/PDF..millions-both ways">Translation/PDF..millions-both ways</option>
-                <option value="Collaboration with ngos">Collaboration with ngos</option>
-                <option value="Documentary sessions">Documentary sessions</option>
-                <!--<option value="task30"></option>
-                <option value="task31"></option>
-                <option value="task32"></option>-->
-            
-        
-                
-              </select>
+            </select>
+            <input type="text" id="taskOther" name="taskOther" class="other-input" placeholder="Enter task name">
 
 
             <label style="margin-top: 10px;" for="password" >Action</label>
@@ -156,7 +123,7 @@
 
 
             <label for="status" >Status:</label>
-            <select style="width: 330px; padding-top: 14px; padding-bottom: 14px; border-left: 2px solid black ; border-top:2px solid black; border-right: 2px solid grey; border-bottom: 2px solid grey; border-radius: 5px;" name="status" id="dog-names"> 
+            <select name="status" id="status">
                 <option value="just Allotted">Just Allotted</option> 
                 <option value="Started">Started</option> 
                 <option value="Under Progress" >Under progress</option> 
@@ -178,7 +145,22 @@
 
         </form>
 
+
 <?php include('closeConnection.php'); ?>
+
+<!-- JavaScript to toggle "other" input fields -->
+<script>
+    function toggleOtherInput(selectId, inputId) {
+        var selectElement = document.getElementById(selectId);
+        var otherInput = document.getElementById(inputId);
+
+        if (selectElement.value === 'other') {
+            otherInput.style.display = 'block';
+        } else {
+            otherInput.style.display = 'none';
+        }
+    }
+</script>     
 
 </body>
 
