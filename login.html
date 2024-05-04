@@ -78,7 +78,7 @@
     <div class="container">
 <!-- show the below line only if there exist a message parameter in the url -->
 
-        <h3 style="display:none;" id="message">Email already exists</h3>
+        <h3 style="display:none;" id="message"></h3>
 
         <h1>Login</h1>
 
@@ -173,7 +173,16 @@
 <script>
     const searchParams = new URLSearchParams(window.location.search);
     console.log(searchParams.get('message'));
-    if(searchParams.get('message') === 'Email already exists. Please login.'){
+    if(searchParams.get('message') === 'Email already exists.'){
+        document.getElementById('message').innerHTML = 'Email already exists';
+        document.getElementById('message').style.display = 'block';
+    }
+    if(searchParams.get('message') === 'Invalid password!'){
+        document.getElementById('message').innerHTML = 'Invalid email or password.';
+        document.getElementById('message').style.display = 'block';
+    }
+    if(searchParams.get('message') === 'User not found!'){
+        document.getElementById('message').innerHTML = 'User not found! Not registered by admin.';
         document.getElementById('message').style.display = 'block';
     }
 
