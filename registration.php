@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = mysqli_query($conn, $checkEmail);
     if (mysqli_num_rows($result) > 0) {
         // Email already exists, redirect to login page
-        header("Location: ./login.html?message=Email already exists. Please login.");
+        header("Location: ./login.html?message=Email already exists.");
         exit();
     }
 
