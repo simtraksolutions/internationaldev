@@ -26,10 +26,6 @@
             align-items: center;
             margin-bottom: 40px;
         }
-        /*#sidebar a:hover {
-            width: 10px;
-            height: 15px;
-        }*/
         
         #sidebar a {
             text-decoration: none;
@@ -38,12 +34,11 @@
             justify-content: space-between;
             cursor: pointer;
         }
-        
-        #sidebar a:hover {
+        /*#sidebar a:hover {
             background-color: #e9e3e3;
             text-decoration: underline;
             text-decoration-color: #000000;
-        }
+        }*/
         
         #sidebar a.active {
             text-decoration: underline;
@@ -76,10 +71,6 @@
         .container12 {
             width: 49%;
             float: right;
-        }
-        
-        .lrow {
-            text-align: left;
         }
         
         .content1 {
@@ -119,11 +110,13 @@
             padding: 8px 5px;
             text-align: center;
             text-decoration: none;
-            display: inline-block;
             font-size: 16px;
             margin: 4px 2px;
-            margin-bottom: 15px;
             cursor: pointer;
+            justify-content: right;
+            float: right;
+            /* Float the container to the right */
+            margin-top: 10px;
         }
         
         .content_tasks {
@@ -137,7 +130,7 @@
             margin-top: 20px;
         }
         
-        button {
+        .volunteer-status-button {
             padding: 10px 15px;
             border: none;
             cursor: pointer;
@@ -165,9 +158,6 @@
         #photo-container {
             width: 300px;
             height: 300px;
-            /* Adjust container size as needed *
-            border: 2px dashed #ccc;
-            /*margin-left: 1100px;*/
             display: flex;
             justify-content: center;
             align-items: center;
@@ -177,7 +167,6 @@
         #photo-preview {
             max-width: 100%;
             max-height: 100%;
-            /* Adjust the size of the photo within the container */
             width: auto;
             height: auto;
         }
@@ -192,6 +181,19 @@
             flex-direction: row;
             display: flex;
         }
+        
+        .active-button {
+            background-color: #13960c;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            padding: 5px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -199,7 +201,6 @@
 
     <div id="sidebar">
         <a href="http://127.0.0.1:5500/Home_page.html" title="Home"><img src="https://www.freeiconspng.com/uploads/home-house-silhouette-icon-building--public-domain-pictures--20.png"></a>
-        <!--<a href="http://127.0.0.1:5500/profiles.html" title="Volunteer Profile"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjoxxJYsY_IZZcGn3MLq8ayWfk9YGzxRZ-3emZLUpVJQ6cFkfR_VRDBFc05tdBS7IqOcs&usqp=CAU" style="height: 28px; width:28px"></a>-->
         <a href="http://127.0.0.1:5500/masterpage.html" title="Master page"><img src=https://cdn4.iconfinder.com/data/icons/project-management-72/70/group__team__management__employees_-512.png></a>
         <a href="http://127.0.0.1:5500/Admin_page.html#" title=" DeputyAdmin_page"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjoxxJYsY_IZZcGn3MLq8ayWfk9YGzxRZ-3emZLUpVJQ6cFkfR_VRDBFc05tdBS7IqOcs&usqp=CAU" style="height: 28px; width:28px"></a>
         <a href="http://127.0.0.1:5500/sign_in.html" title="Logout"><img src=https://www.dlf.pt/dfpng/middlepng/356-3564451_a-shutdown-restart-icons-transparent-background-logout-icon.png></a>
@@ -210,8 +211,10 @@
         <div class="content1">
             <div class="container" style="padding-left:40px; padding-right:40px;">
                 <div class="container1">
-                    <h2 style="font-weight:bold; margin-top:0; margin-bottom: 2px;">Prachi</h2>
-                    <h2 style="font-weight:100; margin-top:0">NIN - 0000</h2>
+                    <div>
+                        <h2 style="font-weight:bold; margin-top:0; margin-bottom: 2px;">Prachi</h2>
+                        <h2 style="font-weight:100; margin-top:0">NIN - 0000</h2>
+                    </div>
                     <br>
                     <br>
                     <div class="row">
@@ -222,29 +225,14 @@
                         </div>
                         <div class="container12">
                             <div class="rrow">
-                                <a href="#" class="button" style="height: 5px; padding-top: 2px; padding-bottom:15px">Active</a>
+                                <a href="#" class="active-button" style="height: 5px; padding-top: 2px;">Active</a>
                             </div>
                         </div>
                     </div>
                     <br>
                     <br>
 
-                    <!--<div class="row">
-                        <div class="container11">
-                            <div class="lrow">
-                                <label><strong>Name:</strong></label>
-                            </div>
-                        </div>
-                        <div class="container12">
-                            <div class="rrow">
-                                <label>prachi</label>
-                            </div>
-                        </div>
-                    </div>--
 
-
-                    <br>
-                    <br>-->
 
                     <div class="row">
                         <div class="container11">
@@ -337,65 +325,69 @@
                     <br>
                 </div>
 
-                <div class="container2" style="margin-top: 105px;">
-                    <div class="row">
-                        <div class="container11">
-                            <div class="lrow">
-                                <label><strong>College/University:</strong></label>
+                <div class="container2">
+                    <a href="http://127.0.0.1:5501/volunteer%20details-1.html" class="button">Add Volunteer</a>
+                    <a href="http://127.0.0.1:5501/add_volunteer_form.html" class="button" onclick="addVolunteerTask()">Add Task</a>
+                    <div class="container2" style="margin-top: 105px;">
+                        <div class="row">
+                            <div class="container11">
+                                <div class="lrow">
+                                    <label><strong>College/University:</strong></label>
+                                </div>
+                            </div>
+                            <div class="container12">
+                                <div class="rrow">
+                                    <label>--</label>
+                                </div>
                             </div>
                         </div>
-                        <div class="container12">
-                            <div class="rrow">
-                                <label>--</label>
-                            </div>
-                        </div>
-                    </div>
 
-                    <br>
-                    <br>
-                    <div class="row">
-                        <div class="container11">
-                            <div class="lrow">
-                                <label><strong>Course:</strong></label>
+                        <br>
+                        <br>
+                        <div class="row">
+                            <div class="container11">
+                                <div class="lrow">
+                                    <label><strong>Course:</strong></label>
+                                </div>
+                            </div>
+                            <div class="container12">
+                                <div class="rrow">
+                                    <label>--</label>
+                                </div>
                             </div>
                         </div>
-                        <div class="container12">
-                            <div class="rrow">
-                                <label>--</label>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                    <br>
+                        <br>
+                        <br>
 
-                    <div class="row">
-                        <div class="container11">
-                            <div class="lrow">
-                                <label><strong>Facebook link:</strong></label>
+                        <div class="row">
+                            <div class="container11">
+                                <div class="lrow">
+                                    <label><strong>Facebook link:</strong></label>
+                                </div>
+                            </div>
+                            <div class="container12">
+                                <div class="rrow">
+                                    <label>--</label>
+                                </div>
                             </div>
                         </div>
-                        <div class="container12">
-                            <div class="rrow">
-                                <label>--</label>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                    <br>
+                        <br>
+                        <br>
 
-                    <div class="row">
-                        <div class="container11">
-                            <div class="lrow">
-                                <label><strong>linkedin link:</strong></label>
+                        <div class="row">
+                            <div class="container11">
+                                <div class="lrow">
+                                    <label><strong>linkedin link:</strong></label>
+                                </div>
+                            </div>
+                            <div class="container12">
+                                <div class="rrow">
+                                    <label>--</label>
+                                </div>
                             </div>
                         </div>
-                        <div class="container12">
-                            <div class="rrow">
-                                <label>--</label>
-                            </div>
-                        </div>
-                    </div>
 
+                    </div>
                 </div>
 
             </div>
@@ -410,13 +402,13 @@
         </div>
         <br>
         <br>
-        <button>All Tasks</button>
-        <button>Just allotted</button>
-        <button>Started </button>
-        <button>Under progress</button>
-        <button>Completed</button>
-        <button>Purged/Cancelled</button>
-        <button>About to be completed</button>
+        <button class="volunteer-status-button">All Tasks</button>
+        <button class="volunteer-status-button">Just allotted</button>
+        <button class="volunteer-status-button">Started </button>
+        <button class="volunteer-status-button">Under progress</button>
+        <button class="volunteer-status-button">Completed</button>
+        <button class="volunteer-status-button">Purged/Cancelled</button>
+        <button class="volunteer-status-button">About to be completed</button>
 
         <br>
         <br>
