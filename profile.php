@@ -147,9 +147,10 @@ include('fetch_data.php');
             border: none;
             cursor: pointer;
             font-size: 16px;
-            margin: 0 10px;
+            margin: 3px 10px;
             border-radius: 5px;
             background-color: white;
+            
         }
 
         .button_dormant{
@@ -250,6 +251,12 @@ include('fetch_data.php');
         .content_tasks {
         overflow: scroll;
         border-radius: 5px;
+        }
+
+        .profile-btn{
+            position: relative;
+            margin: 8px;
+            float: right;
         }
     </style>
 </head>
@@ -400,7 +407,12 @@ include('fetch_data.php');
                     <br>
                 </div>
 
-                <div class="container2" style="margin-top: 105px;">
+            <!-- <div class="container2"> -->
+                <div class="container2">
+                    <a class="button profile-btn" onclick="addVolunteer()">Edit Info</a>
+                    <a class="button profile-btn" onclick="loadTaskPage(<?php echo $personal['id']?>)">Add Task</a> 
+
+                <div class="container2" style="margin-top: 150px; width: 80%; text-align:left">
                     <div class="row">
                         <div class="container11">
                             <div class="lrow">
@@ -460,7 +472,7 @@ include('fetch_data.php');
                     </div>
 
                 </div>
-
+            </div>
             </div>
             <br>
             <br>
@@ -517,6 +529,17 @@ include('fetch_data.php');
     </div>
 
     <script>
+        //adding volunteer information
+        function addVolunteer() {
+            window.location.href = "volunteer_details-1.php?user_id=<?php echo $personal['id']?>";
+        }
+        //adding task for a particular volunteer
+        function addVolunteerTask() {
+            window.location.href = "addvolunteer_pagenew.php?loc=Home_page";
+        }
+    </script>
+
+    <script>
 
            //show the status of the user 
        
@@ -549,6 +572,12 @@ include('fetch_data.php');
 
 const userId = <?php echo $personal['id']?>;
 location.href = window.location.pathname + '?task_status=' + status +'&user_id=' + userId;}
+
+
+//javascript function to redirect the user to the task page
+        function loadTaskPage(volunteerId) {
+            location.href = './volunteers_tasks.php?user_id=' + volunteerId;
+        }
     </script>
 
 
