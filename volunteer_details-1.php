@@ -19,7 +19,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 15px;
             background-position: center;
             background-image: url(//www.presentationmagazine.com/images3/subtle-waves468.jpg);
             background-image: url(https://www.imageshine.in/uploads/gallery/geometric-Blue-Wallpaper-Free-Download.jpg);
@@ -32,7 +32,7 @@
             max-width: 650px;
             width: 100%;
             background: #fff;
-            padding: 25px;
+            padding: 20px;
             border: 2px;
             border-color: black;
             border-radius: 8px;
@@ -41,7 +41,7 @@
             border-bottom-width: 2px;
             overflow-y: auto;
             /* Enable vertical scrolling */
-            max-height: 90vh;
+            max-height: 95vh;
         }
         
         .container::-webkit-scrollbar {
@@ -57,19 +57,19 @@
         }
         
         .container header {
-            font-size: 30px;
+            font-size: 25px;
             color: #0b0b0b;
             font-weight: 500;
             text-align: center;
         }
         
         .container .form {
-            margin-top: 30px;
+            margin-top: 20px;
         }
         
         .form .input-box {
             width: 100%;
-            margin-top: 20px;
+            margin-top: 15px;
         }
         
         .input-box label {
@@ -123,7 +123,7 @@
             color: #fff;
             font-size: 1rem;
             font-weight: 400;
-            margin-top: 30px;
+            margin-top: 20px;
             border: none;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -172,18 +172,43 @@
     </style>
 </head>
 <?php 
-    include('db.connect.php');
-    session_start();
-$name = '';
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+//php scripts to print the server errors
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+include('db_connect.php');
+    
+// check if the user id is set
+if(isset($_REQUEST['user_id'])){
+    //php query to fetch the data from the volunteerdetails table for the given user id using prepared statement or paramertized query
+    $sql = "SELECT * FROM volunteerdetails WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $_REQUEST['user_id']);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    $fname = $row['first_name'];
+    $mname = $row['middle_name'];
+    $lname = $row['last_name'];
+    $email = $row['email'];
+    $country = $row['country'].' ('.$row['country_code'].')';
+    $phone_number = $row['phone_number'];
+    $city = $row['city'];
+    $source_of_joining = $row['source_of_joining'];
 }
+else{
+    //if the user id is not set remove the values from the variables
+    $fname = ' ';
+    $mname = ' ';
+    $lname = ' ';
+    $email = ' ';
+    $country = ' ';
+    $phone_number = ' ';
+    $city = ' ';
+    $source_of_joining = ' ';
 
-if (isset($_SESSION["name"]) && !empty($_SESSION["name"])) {
-    $name = $_SESSION["name"];
-
-  }
-
+}
 ?>
 <body>
     <section class="container">
@@ -192,27 +217,27 @@ if (isset($_SESSION["name"]) && !empty($_SESSION["name"])) {
         <form method="POST"  action="insertVolunteerdetials1.php" class="form">
             <div class="input-box">
                 <label> First Name</label>
-                <input type="text" name='fname' placeholder="Enter name" required />
+                <input value="<?php echo $fname?>" type="text" name='fname' placeholder="Enter name" required />
             </div>
             <div class="input-box">
                 <label>Middle Name</label>
-                <input type="text" name='mname' placeholder="Enter name" />
+                <input value="<?php echo $mname?>" type="text" name='mname' placeholder="Enter name" />
             </div>
             <div class="input-box">
                 <label>Last Name</label>
-                <input type="text" name='lname' placeholder="Enter name" required />
+                <input value="<?php echo $lname?>" type="text" name='lname' placeholder="Enter name" required />
             </div>
 
             <div class="input-box">
                 <label>Email Address</label>
-                <input type="email" name='email' placeholder="Enter email address" required />
+                <input value="<?php echo $email?>" type="email" name='email' placeholder="Enter email address" required />
             </div>
 
             <div class="column">
                 <div class="input-box">
                     <label>Country/ Country code</label>
                     <select id='countrySelect' name="country_code" >
-                        <option  value="" disabled selected>
+                        <option  value="<?php echo $country?>"><?php echo $country?></option>
                         <option  value="American Samao (+1684)">American Samao (+1684)</option>
                         <option  value="Albania (+335)">Albania (+335)</option>
                         <option  value="Algeria  (+213)">Algeria  (+213)</option>
@@ -466,7 +491,7 @@ if (isset($_SESSION["name"]) && !empty($_SESSION["name"])) {
                 </div>
                 <div class="input-box">
                     <label>Phone number</label>
-                    <input type="phone number" name='phone_number' maxlength="10" placeholder="Enter phone number" required />
+                    <input value="<?php echo $phone_number?>" type="phone number" name='phone_number' maxlength="10" placeholder="Enter phone number" required />
                 </div>
             </div>
 
@@ -474,19 +499,58 @@ if (isset($_SESSION["name"]) && !empty($_SESSION["name"])) {
 
             <div class="input-box">
                 <label>City</label>
-                <input id="city" name='city' type="text">
+                <input value="<?php echo $city?>" id="city" name='city' type="text">
 
             </div>
 
             <div class="column">
                 <div class="input-box">
                     <label>Source of joining</label>
-                    <input type="text" name="source_of_joining" placeholder="Enter source of joining" required />
+                    <input value="<?php echo $source_of_joining?>" type="text" name="source_of_joining" placeholder="Enter source of joining" required />
                 </div>
             </div>
-            <button onclick="submitVolunteerDetailsPg1()">Submit</button>
+            <button onclick="submitVolunteerDetailsPg1()" id="submit">Submit</button>
         </form>
     </section>
+
+
+    <script>
+
+    //script to update the user inforamtion and prevent the default form submission
+        function submitVolunteerDetailsPg1() {
+           //check if the user id is set in the url parameter
+            if (window.location.search) {
+                //get the user id from the url parameter
+                let destination = 'insertVolunteerdetials1.php';
+                const urlParams = new URLSearchParams(window.location.search);
+                const userId = urlParams.get('user_id');
+                 //if the user id  is set then prevent the default form submission
+                if (userId) {
+                   destination = 'insertVolunteer'
+
+
+                }    
+            // console.log('Form submitted!');
+        }
+    }
+        // function sendDataToServer(form) {
+        //     // Use AJAX or other methods to send data to the server
+        //     // Example using Fetch API:
+        //     fetch('/api/submitVolunteerDetails', {
+        //             method: 'POST',
+        //             body: new FormData(form),
+        //         })
+        //         .then(response => response.json())
+        //         .then(data => {
+        //             // Handle the response from the server if needed
+        //             console.log(data);
+        //         })
+        //         .catch(error => {
+        //             // Handle errors
+        //             console.error('Error:', error);
+        //         });
+        // }
+</script>
 
     <script>
         // Populate cities based on the selected country
@@ -512,37 +576,6 @@ if (isset($_SESSION["name"]) && !empty($_SESSION["name"])) {
             });
         });
 
-        function submitVolunteerDetailsPg1() {
-            // Validate form fields here if needed
-            // Assuming you have a function to send data to the server (e.g., using AJAX)
-            // sendDataToServer(document.querySelector('.form'));
-             // Assuming your select element has an id of 'countrySelect'
-       
-            console.log('Form submitted!');
-        }
-
-        // function sendDataToServer(form) {
-        //     // Use AJAX or other methods to send data to the server
-        //     // Example using Fetch API:
-        //     fetch('/api/submitVolunteerDetails', {
-        //             method: 'POST',
-        //             body: new FormData(form),
-        //         })
-        //         .then(response => response.json())
-        //         .then(data => {
-        //             // Handle the response from the server if needed
-        //             console.log(data);
-        //         })
-        //         .catch(error => {
-        //             // Handle errors
-        //             console.error('Error:', error);
-        //         });
-        // }
-
-
-
-
-        
 
         
     </script>

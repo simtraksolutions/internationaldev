@@ -1,6 +1,7 @@
 <?php
 include("db_connect.php");
 
+
 // Process form data
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $fname = $_POST["fname"];
@@ -27,8 +28,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 // Fetch existing volunteer data
-// $sqlFetchData = "SELECT * FROM Volunteerdetails";
-// $result = $conn->query($sqlFetchData);
+$sqlFetchData = "SELECT * FROM Volunteerdetails";
+$result = $conn->query($sqlFetchData);
 
 // Close connection
 $conn->close();
