@@ -526,10 +526,12 @@ else{
                 const userId = urlParams.get('user_id');
                  //if the user id  is set then prevent the default form submission
                 if (userId) {
-                   destination = 'insertVolunteer'
-
-
-                }    
+                   destination = 'insertVolunteerdetials1.php?user_id=' + userId;
+                }   
+                //get the form element
+                const form = document.querySelector('.form');
+                //change the action attribute of the form to the destination
+                form.action = destination; 
             // console.log('Form submitted!');
         }
     }

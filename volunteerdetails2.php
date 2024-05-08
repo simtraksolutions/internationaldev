@@ -141,48 +141,119 @@
         }
     </style>
 </head>
+<?php
 
+//include the database connection file
+include("db_connect.php");
+if(isset($_REQUEST['user_id'])){
+    //php query to fetch the data from the volunteerdetails table for the given user id using prepared statement or paramertized query
+    $sql = "SELECT * FROM volunteer_details_two WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $_REQUEST['user_id']);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    //assign the values to the variables
+    $college = $row['college'];
+    $course = $row['course'];
+    $linkedin = $row['linkedin'];
+    $facebook = $row['facebook'];
+
+}
+else{
+    //if the user id is not set remove the values from the variables
+    $college = '';
+    $course = '';
+    $linkedin = '';
+    $facebook = '';
+}
+?>
 <body>
     <section class="container">
         <header>
 
             <div class="header1">Volunteer Additional details
-                <a href="insertVolunteerdetails2.php?check=skipped" style="float:right;">
-                    <button style="padding-left:2px; padding-right:2px; padding-bottom:2px ; padding-top:5px">skip for now</button></a>
+                <a id='skip' style="float:right;">
+                    <button onclick="skip()" style="padding-left:2px; padding-right:2px; padding-bottom:2px ; padding-top:5px">skip for now</button></a>
             </div>  
 
         </header>
         <hr>
-        <form action="insertVolunteerdetails2.php" class="form" method="POST">
+        <form class="form" method="POST">
 
             <div class="input-box">
                 <label>College/University</label>
-                <input type="text" placeholder="Enter college/university name" name="college" id="college"  required />
+                <input value="<?php echo $college ?>" type="text" placeholder="Enter college/university name" name="college" id="college"  required />
             </div>
             <div class="input-box">
                 <label>Course</label>
-                <input type="text" placeholder="Enter course" id="course" name="course" required />
+                <input value="<?php echo $course?>" type="text" placeholder="Enter course" id="course" name="course" required />
             </div>
 
 
             <div class="column">
                 <div class="input-box">
                     <label>Linkedin link</label>
-                    <input type="link" placeholder="Enter Id link" id="linkedin" name="linkedin" required/>
+                    <input value="<?php echo $linkedin?>" type="link" placeholder="Enter Id link" id="linkedin" name="linkedin" required/>
                 </div>
             </div>
 
             <div class="input-box">
                 <label>Facebook link</label>
-                <input type="link" placeholder="Enter id link" id="facebook" name="facebook" required/>
+                <input value="<?php echo $facebook?>" type="link" placeholder="Enter id link" id="facebook" name="facebook" required/>
             </div>
 
 
 
-            <a href="#"><button type="submit">submit</button></a>
+            <a href="#"><button type="submit" onclick="submitVolunteerDetailsPg2()">submit</button></a>
         </form>
     </section>
 
+    <script>
+
+//script to update the user inforamtion and prevent the default form submission
+    function submitVolunteerDetailsPg2() {
+       //check if the user id is set in the url parameter
+        if (window.location.search) {
+            //get the user id from the url parameter
+            let destination = 'insertVolunteerdetails2.php';
+            const urlParams = new URLSearchParams(window.location.search);
+            const userId = urlParams.get('user_id');
+             //if the user id  is set then prevent the default form submission
+            if (userId) {
+               destination = 'insertVolunteerdetails2.php?user_id=' + userId;
+            }   
+            //get the form element
+            const form = document.querySelector('.form');
+            //change the action attribute of the form to the destination
+            form.action = destination; 
+        // console.log('Form submitted!');
+    }
+}
+
+//function to skip the form submission
+function skip() {
+    //redirect to the home page
+    if (window.location.search) {
+        //get the user id from the url parameter
+        let destination = 'insertVolunteerdetails2.php?check=skipped';
+            const urlParams = new URLSearchParams(window.location.search);
+            const userId = urlParams.get('user_id');
+             //if the user id  is set then prevent the default form submission
+            if (userId) {
+               destination = 'insertVolunteerdetails2.php?user_id=' + userId + '&check=skipped';
+            }   
+
+            //get the anchor tag of the skip button
+            const skip = document.querySelector('#skip');
+            //change the href attribute of the anchor tag to the destination
+            skip.href = destination;
+
+
+    }
+}
+   
+</script>
 
 
 
