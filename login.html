@@ -176,15 +176,23 @@
     if(searchParams.get('message') === 'Email already exists.'){
         document.getElementById('message').innerHTML = 'Email already exists';
         document.getElementById('message').style.display = 'block';
+
     }
     if(searchParams.get('message') === 'Invalid password!'){
         document.getElementById('message').innerHTML = 'Invalid email or password.';
         document.getElementById('message').style.display = 'block';
+
+    
     }
     if(searchParams.get('message') === 'User not found!'){
         document.getElementById('message').innerHTML = 'User not found! <br> Or <br> Not registered by Admin.';
         document.getElementById('message').style.display = 'block';
     }
+
+    //make the message disappear after 5 seconds
+    setTimeout(() => {
+            document.getElementById('message').style.display = 'none';
+        }, 3000);
 
 </script>
 </body>
