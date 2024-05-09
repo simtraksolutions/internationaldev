@@ -173,16 +173,7 @@
             margin-bottom: 15px;
             cursor: pointer;
         }
-        /*styling for popup
-        
-        .userinputs {
-            justify-content: center;
-            /*padding: 0px;*
-            font-size: 20px;
-            border-color: black;
-            display: absolute;
-        }*/
-        
+       
         .popup {
             display: none;
             position: fixed;
@@ -270,6 +261,67 @@
             height: 30px;
             padding: 5px;
         }
+
+          .modal {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 450px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .close {
+            color: #aaa;
+            float: right;
+            margin-left: 380px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+        }
+        
+        .modal-content p {
+            margin-bottom: 15px;
+        }
+        
+        .modal-content button {
+            background-color: #13960c;
+            border: none;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .modal-content button:hover {
+            background-color: #0d7709;
+        }
+        
+        .action-button1:hover {
+            background-color: #3b65af;
+        }
+        
+        .action-button1:hover img {
+            filter: brightness(80%);
+        }
     </style>
 </head>
 
@@ -286,65 +338,27 @@
 
 
     <div id="content">
-        <!--<div class="">
-            <div class="container_cards">
-                <div class="row" style="margin-left: 95px;">
-                    <div class="col-lg-3">
-                        <div class="cards">
-                            <div class="card-1">
-                                <h4 style="color:#331c4d;"><strong>Welcome <br><hr>korlagunta pallavi</strong></h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="cards">
-                            <center><img src="https://adore.simtrak.in/data/sys/com_logo.png"><br>
-                                <strong>International Volunteering management System</strong></center>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="cards">
-                            Powered By<br>
-                            <img src="https://adore.simtrak.in/data/sys/logo_min.png"><br><br>
-                        </div>
-                    </div>
-                    !--<div class="col-lg-3">
-                        <div class="cards">
-                            Today is
-                            <h3>28/02/2024</h3><br><br>
-                        </div>
-                    </div>--
-                </div>
-            </div>
-        </div>-->
-
-
+   
         <div class="container">
 
             <a class="button" onclick="addVolunteer()">Add Volunteer</a>
 
             <a class="button" onclick="addVolunteerTask()">Add Task</a>
 
-            <!--<a href="#" class="button" id="Add task" onclick="openPopup()">Add Task</a> /// by this add volunteer button acts as an popup
-
-
-            !--<a href="#" class="button" id="Add task" onclick="openPopup()">Add task </a> ///by this an oter button will be displayed for popup of adding task-->
-
-            <!--<label><div class="search_button" style="float: right"> Search: 
-                <input type="text" name="search"  id="volunteer_task" onkeyup="filterFunction()" style="float:right">
-                </div>
-            </label>-->
-
-            <!--<label>   for now
-                <div class="search_button" style="float: right"> Search: 
-                    <input type="text" name="search" id="searchInput" onkeyup="filterTable()" style="float:right">
-                </div>
-            </label>-->
-
             <div class="search-container">
                 <label>
                     Search:
                     <input type="text" name="search" id="searchInput" onkeyup="filterTable()">
+                </label>
+                <label>
+                    <select name="sort_field" id="taskSelect" style="height:30px;width:200px; padding: 5px;">
+                        <option value="task1">1 Article-own</option>
+                        <option value="task2">1 webinar-own</option>
+                        <option value="task3">5 Articles</option>
+                        <option value="task4">Organise young leader activites</option>
+                        <option value="task5">Volunteer Team to be created</option>
+                        <option value="task6">20 participants for any program</option>                
+                    </select>
                 </label>
             </div>
             <br>
@@ -392,7 +406,18 @@
                         <td data-label=" task">
                             <button type="button" class="btn btn-outline-primary"><a href="#" onclick="loadTasks(userId)"><i class="ri-list-check-3"></i></a></button>
                         </td>
-                        <td data-label=" action">yet-to-connect</td>
+                        <td>
+                            <button type="button" class="action-button1" style="padding: 0px;border-radius: 5px;" onclick="openPopup()">
+                                <img src="https://cdn.iconscout.com/icon/premium/png-256-thumb/update-2473968-2057919.png?f=webp"
+                                    style="width:38px; height:30px; background-color:#262697; "
+                                    title="Update Status">
+                            </button>
+                            <!--<button type="button" class="action-button2" style="padding: 0px;border-radius: 5px;" onclick="window.location.href='http://127.0.0.1:5500/volunteers_tasks.html'" title="Task update">
+                                <img
+                                    src="https://www.shutterstock.com/image-vector/update-icon-web-refresh-sign-260nw-1281047068.jpg"
+                                    style="width:38px; height:30px; background-color:#4f6f4e;">
+                            </button>-->
+                        </td>
                         <td data-label=" status"><?php echo $row['status']?></td>
                         <!--<td data-label="  "></td>-->
                     </tr>
@@ -406,6 +431,32 @@
 
         </div>
     </div>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <h2 style="margin-bottom:15px;">Update Status</h2>
+
+
+            <select name="task" id="taskSelect" style="width: 400px; height: 48px; border-radius:4px;">
+                <option value="task0">Just alloted</option>
+            </select>
+            <br>
+            <select name="task" id="taskSelect" style="width: 400px; height: 48px; border-radius:4px;">
+                <option value="task0">Ongoing</option>
+                <option value="task1">Started</option>
+                <option value="task2">Under Progress</option>
+                <option value="task3">Completed</option>
+                <option value="task4">Purged/Cancelled</option>
+                <option value="task5">About to be completed</option>                
+            </select>
+            <br><br>
+
+            <button onclick="submitStatus()">Update</button>
+        </div>
+    </div>
+
+
     <script>
         //adding volunteer
         function addVolunteer() {
@@ -417,86 +468,26 @@
         }
     </script>
 
-    <!--<script>
-                  // javascript functionality for searching by volunteer id
-        function filterFunction(event) {
-            var input, filter, table, tr, td, i, txtValue;
-            input = document.getElementById("volunteer_task");
-            filter = input.value.toUpperCase();
-            table = document.getElementById("volunteer_tasktable");
-            tr = table.getElementsByTagName("tr");
-            for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[0];
-                if (td) {
-                    txtValue = td.textContent || td.innerText;
-                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                        tr[i].style.display = "";
-                    } else {
-                        tr[i].style.display = "none";
-                    }
-                }
-            }
-        }
-    </script>-->
-    <!--<script>
-        //javascript functionality for searching by volunteer name
-        function filterFunction() {
-            var input, filter, table, tr, td, i, txtValue;
-            input = document.getElementById("volunteer_task");
-            filter = input.value.toUpperCase();
-            table = document.getElementById("volunteer_tasktable");
-            tr = table.getElementsByTagName("tr");
-
-            for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[1]; // Change the index to 1 for name column
-                if (td) {
-                    txtValue = td.textContent || td.innerText;
-                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                        tr[i].style.display = "";
-                    } else {
-                        tr[i].style.display = "none";
-                    }
-                }
-            }
-        }
-    </script>-->
-
-    <script>
-        // Function to open the popup
+<script>
         function openPopup() {
-            document.getElementById("popup-container").style.display = "block";
+            var modal = document.getElementById('myModal');
+            modal.style.display = 'block';
         }
 
-        // Function to close the popup
         function closePopup() {
-            document.getElementById("popup-container").style.display = "none";
+            var modal = document.getElementById('myModal');
+            modal.style.display = 'none';
         }
 
-        // Event listener to open the popup when Sign In button is clicked
-        document.getElementById("Add task").addEventListener("click", openPopup);
-
-        // Event listener to close the popup
-        document.getElementById("close-popup").addEventListener("click", closePopup);
+        function submitStatus() {
+            // Perform actions like updating status
+            // For example, you can fetch data from inputs or perform an AJAX request
+            alert('Status updated successfully!');
+            closePopup(); // Close the modal after the action is performed
+        }
     </script>
 
-    <!--<script>
-        function filterByTask(selectedTask) {
-            var table = document.getElementById("volunteer_tasktable").getElementsByTagName('tbody')[0];
-            var tr = table.getElementsByTagName("tr");
-
-            for (var i = 0; i < tr.length; i++) {
-                var td = tr[i].getElementsByTagName("td")[2]; // Index 2 for Task Name column
-                if (td) {
-                    var taskName = td.textContent || td.innerText;
-                    if (selectedTask === "All" || taskName === selectedTask) {
-                        tr[i].style.display = "";
-                    } else {
-                        tr[i].style.display = "none";
-                    }
-                }
-            }
-        }
-    </script>-->
+    
 
     <script>
         // JavaScript function to filter the table based on input value
