@@ -10,6 +10,7 @@
     <?php
         include('db_connect.php');
         include("fetch_data.php");
+        include("sortByTask.php")
     ?>
     <style>
         body {
@@ -322,20 +323,25 @@
         .action-button1:hover img {
             filter: brightness(80%);
         }
+
+        #taskSelect{
+            margin: 10px;
+        }
+
+        .sorted{
+            background-color: #f7f782 !important;
+        }
     </style>
 </head>
 
 <body>
 
-    <div id="sidebar">
-
-        <a href="http://127.0.0.1:5500/Home_page.html" title="Home"><img src="https://www.freeiconspng.com/uploads/home-house-silhouette-icon-building--public-domain-pictures--20.png"></a>
-        <!--<a href="http://127.0.0.1:5500/profiles.html" title="Volunteer Profile"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjoxxJYsY_IZZcGn3MLq8ayWfk9YGzxRZ-3emZLUpVJQ6cFkfR_VRDBFc05tdBS7IqOcs&usqp=CAU" style="height: 28px; width:28px"></a>-->
-        <a href="http://127.0.0.1:5500/masterpage.html" title="Master page"><img src=https://cdn4.iconfinder.com/data/icons/project-management-72/70/group__team__management__employees_-512.png></a>
-        <a href="http://127.0.0.1:5500/Admin_page.html#" title=" DeputyAdmin_page"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjoxxJYsY_IZZcGn3MLq8ayWfk9YGzxRZ-3emZLUpVJQ6cFkfR_VRDBFc05tdBS7IqOcs&usqp=CAU" style="height: 28px; width:28px"></a>
-        <a href="http://127.0.0.1:5500/sign_in.html" title="Logout"><img src=https://www.dlf.pt/dfpng/middlepng/356-3564451_a-shutdown-restart-icons-transparent-background-logout-icon.png></a>
+<div id="sidebar">
+        <a href="http://127.0.0.1:5501/Home_page.html" title="Home"><img src="https://www.freeiconspng.com/uploads/home-house-silhouette-icon-building--public-domain-pictures--20.png"></a>
+        <a href="http://127.0.0.1:5501/masterpage.html" title="Master page"><img src="https://cdn4.iconfinder.com/data/icons/project-management-72/70/group__team__management__employees_-512.png"></a>
+        <a href="http://127.0.0.1:5501/Admin_page.html#" title=" DeputyAdmin_page"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjoxxJYsY_IZZcGn3MLq8ayWfk9YGzxRZ-3emZLUpVJQ6cFkfR_VRDBFc05tdBS7IqOcs&usqp=CAU" style="height: 28px; width:28px"></a>
+        <a href="http://127.0.0.1:5501/sign_in.html" title="Logout"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFvB6_NT7_HiGoWadFTjXVTOmOqrtII8V4jTrlJLInxg&s"></a>
     </div>
-
 
     <div id="content">
    
@@ -351,14 +357,17 @@
                     <input type="text" name="search" id="searchInput" onkeyup="filterTable()">
                 </label>
                 <label>
-                    <select name="sort_field" id="taskSelect" style="height:30px;width:200px; padding: 5px;">
-                        <option value="task1">1 Article-own</option>
-                        <option value="task2">1 webinar-own</option>
-                        <option value="task3">5 Articles</option>
-                        <option value="task4">Organise young leader activites</option>
-                        <option value="task5">Volunteer Team to be created</option>
-                        <option value="task6">20 participants for any program</option>                
-                    </select>
+                <form method="POST">
+                <select name="sort_field" id="sort" style="height:30px;width:200px; padding: 5px;" onchange="this.form.submit()">
+                    <option value="All" <?php echo (isset($_POST['sort_field']) && $_POST['sort_field'] == 'All') ? 'selected' : ''; ?>>All</option>
+                    <option value="1 Article-own" <?php echo (isset($_POST['sort_field']) && $_POST['sort_field'] == '1 Article-own') ? 'selected' : ''; ?>>1 Article-own</option>
+                    <option value="1 webinar-own" <?php echo (isset($_POST['sort_field']) && $_POST['sort_field'] == '1 webinar-own') ? 'selected' : ''; ?>>1 webinar-own</option>
+                    <option value="5 Articles" <?php echo (isset($_POST['sort_field']) && $_POST['sort_field'] == '5 Articles') ? 'selected' : ''; ?>>5 Articles</option>
+                    <option value="Organise young leader activites" <?php echo (isset($_POST['sort_field']) && $_POST['sort_field'] == 'Organise young leader activites') ? 'selected' : ''; ?>>Organise young leader activites</option>
+                    <option value="Volunteer Team to be created" <?php echo (isset($_POST['sort_field']) && $_POST['sort_field'] == 'Volunteer Team to be created') ? 'selected' : ''; ?>>Volunteer Team to be created</option>
+                    <option value="20 participants for any program" <?php echo (isset($_POST['sort_field']) && $_POST['sort_field'] == '20 participants for any program') ? 'selected' : ''; ?>>20 participants for any program</option>
+                </select>
+            </form>
                 </label>
             </div>
             <br>
@@ -396,6 +405,28 @@
                     <!--<th></th>-->
                 </thead>
                 <tbody>
+
+                <?php foreach ($volunteers as $volunteer): ?>
+                    <tr class='sorted'>
+                        <!-- Add your table data here -->
+                    <td class='sorted' data-label=" s.no"><a href="#" class="profileLink"><?php echo $volunteer['user_id']?></a></td>
+                        <td class='sorted'><?php echo $volunteer['name']; ?></td>
+                        <td class='sorted' data-label=" task">
+                            <button type="button" class="btn btn-outline-primary"><a href="#" onclick="loadTasks(userId)"><i class="ri-list-check-3"></i></a></button>
+                        </td>
+                        <td class='sorted'>
+                            <button type="button" class="action-button1" style="padding: 0px;border-radius: 5px;" onclick="openPopup()">
+                                <img src="https://cdn.iconscout.com/icon/premium/png-256-thumb/update-2473968-2057919.png?f=webp"
+                                    style="width:38px; height:30px; background-color:#262697; "
+                                    title="Update Status">
+                            </button>
+                        </td>
+                        <td class='sorted' data-label=" status"><?php echo $volunteer['status']?></td>
+                        <!-- Add more table data here -->
+                    </tr>
+                <?php endforeach; ?>
+
+
                     <?php
                         if($registeredUser->num_rows > 0)
                         {  while($row = $registeredUser->fetch_assoc()){?>
@@ -424,6 +455,8 @@
 
 
                     <?php }}?>
+
+                    
                 
                 </tbody>
             </table>
@@ -439,16 +472,14 @@
 
 
             <select name="task" id="taskSelect" style="width: 400px; height: 48px; border-radius:4px;">
-                <option value="task0">Just alloted</option>
+                <option value="task0">Dormant</option>
             </select>
             <br>
             <select name="task" id="taskSelect" style="width: 400px; height: 48px; border-radius:4px;">
-                <option value="task0">Ongoing</option>
-                <option value="task1">Started</option>
-                <option value="task2">Under Progress</option>
-                <option value="task3">Completed</option>
-                <option value="task4">Purged/Cancelled</option>
-                <option value="task5">About to be completed</option>                
+                <option value="Active">Active</option>
+                <option value="Dormant">Dormant</option>
+                <option value="Suspended">Suspended</option>
+                
             </select>
             <br><br>
 
@@ -598,6 +629,28 @@ tableRows.forEach((row) => {
         }
     </script>
 
+
+<script>
+    //make the rows with class row-1 hidden when the option is selected
+    // Get the select element
+    const selectElement = document.querySelector('#sort');
+    selectElement.addEventListener('change', (e) => {
+        const rows = document.querySelectorAll('.row-1');
+        // Loop through each row
+        rows.forEach((row) => {
+            // Check if the selected value is "All"
+            if (selectedValue === 'All') {
+                // Show the row
+                row.style.display = 'table-row';
+            } else {
+                // Hide the row
+                row.style.display = 'none';
+            }
+        });
+    });
+
+
+</script>
 <?php include('closeConnection.php'); ?>
 
 
