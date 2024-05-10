@@ -203,12 +203,11 @@ include 'fetch_data.php';
 
 <body>
 
-    <div id="sidebar">
-
-        <a href="http://127.0.0.1:5500/Home_page.html" title="Home"><img src="https://www.freeiconspng.com/uploads/home-house-silhouette-icon-building--public-domain-pictures--20.png"></a>
-        <!--<a href="http://127.0.0.1:5500/profiles.html" title="Volunteer Profile"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjoxxJYsY_IZZcGn3MLq8ayWfk9YGzxRZ-3emZLUpVJQ6cFkfR_VRDBFc05tdBS7IqOcs&usqp=CAU" style="height: 28px; width:28px"></a>-->
-        <a href="masterpage.html" title="Master page"><img src=https://cdn4.iconfinder.com/data/icons/project-management-72/70/group__team__management__employees_-512.png></a>
-        <a href="http://127.0.0.1:5500/sign_in.html" title="logout"><img src="https://www.dlf.pt/dfpng/middlepng/356-3564451_a-shutdown-restart-icons-transparent-background-logout-icon.png"></a>
+<div id="sidebar">
+        <a href="http://127.0.0.1:5501/Home_page.html" title="Home"><img src="https://www.freeiconspng.com/uploads/home-house-silhouette-icon-building--public-domain-pictures--20.png"></a>
+        <a href="http://127.0.0.1:5501/masterpage.html" title="Master page"><img src="https://cdn4.iconfinder.com/data/icons/project-management-72/70/group__team__management__employees_-512.png"></a>
+        <a href="http://127.0.0.1:5501/Admin_page.html#" title=" DeputyAdmin_page"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjoxxJYsY_IZZcGn3MLq8ayWfk9YGzxRZ-3emZLUpVJQ6cFkfR_VRDBFc05tdBS7IqOcs&usqp=CAU" style="height: 28px; width:28px"></a>
+        <a href="http://127.0.0.1:5501/sign_in.html" title="Logout"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFvB6_NT7_HiGoWadFTjXVTOmOqrtII8V4jTrlJLInxg&s"></a>
     </div>
 
     <div id="content">
