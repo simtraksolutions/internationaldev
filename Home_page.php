@@ -10,7 +10,7 @@
     <?php
         include('db_connect.php');
         include("fetch_data.php");
-        include("sortByTask.php")
+        include("sortData.php")
     ?>
     <style>
         body {
@@ -329,7 +329,11 @@
         }
 
         .sorted{
-            background-color: #f7f782 !important;
+            background-color: #efeeee !important;
+        }
+
+        .status{
+            margin: 2px;
         }
     </style>
 </head>
@@ -351,15 +355,23 @@
 
             <a class="button" onclick="addVolunteerTask()">Add Task</a>
 
-            <div class="search-container">
+            <div class="search-container" style="display: flex; align-items: center; justify-content: center;">
                 <label>
-                    Search:
-                    <input type="text" name="search" id="searchInput" onkeyup="filterTable()">
+                    <div class="search">
+                        Search:
+                        <input type="text" name="search" id="searchInput" onkeyup="filterTable()">
+                    </div>
                 </label>
                 <label>
-                <form method="POST">
+                <div>
+                <form method="POST" id="statusForm">
+                <div class="status">
+        Active <input type="checkbox" name="active" id="active" class="status" <?php echo isset($_POST['active']) ? 'checked' : ''; ?>>
+        Dormant <input type="checkbox" name="dormant" id="dormant" class="status" <?php echo isset($_POST['dormant']) ? 'checked' : ''; ?>>
+        Suspended<input type="checkbox" name="suspended" id="suspended" class="status" <?php echo isset($_POST['suspended']) ? 'checked' : ''; ?>>
+    </div>
                 <select name="sort_field" id="sort" style="height:30px;width:200px; padding: 5px;" onchange="this.form.submit()">
-                    <option value="All" <?php echo (isset($_POST['sort_field']) && $_POST['sort_field'] == 'All') ? 'selected' : ''; ?>>All</option>
+                    <option></option>
                     <option value="1 Article-own" <?php echo (isset($_POST['sort_field']) && $_POST['sort_field'] == '1 Article-own') ? 'selected' : ''; ?>>1 Article-own</option>
                     <option value="1 webinar-own" <?php echo (isset($_POST['sort_field']) && $_POST['sort_field'] == '1 webinar-own') ? 'selected' : ''; ?>>1 webinar-own</option>
                     <option value="5 Articles" <?php echo (isset($_POST['sort_field']) && $_POST['sort_field'] == '5 Articles') ? 'selected' : ''; ?>>5 Articles</option>
@@ -368,6 +380,7 @@
                     <option value="20 participants for any program" <?php echo (isset($_POST['sort_field']) && $_POST['sort_field'] == '20 participants for any program') ? 'selected' : ''; ?>>20 participants for any program</option>
                 </select>
             </form>
+                </div>
                 </label>
             </div>
             <br>
@@ -409,10 +422,10 @@
                 <?php foreach ($volunteers as $volunteer): ?>
                     <tr class='sorted'>
                         <!-- Add your table data here -->
-                    <td class='sorted' data-label=" s.no"><a href="#" class="profileLink"><?php echo $volunteer['user_id']?></a></td>
-                        <td class='sorted'><?php echo $volunteer['name']; ?></td>
+                    <td class='sorted' data-label=" s.no"><a href="#" class="profileLink"><?php echo $volunteer['id']?></a></td>
+                        <td class='sorted'><?php echo $volunteer['first_name']; ?></td>
                         <td class='sorted' data-label=" task">
-                            <button type="button" class="btn btn-outline-primary"><a href="#" onclick="loadTasks(userId)"><i class="ri-list-check-3"></i></a></button>
+                            <button type="button" class="btn btn-outline-primary"><a href="#"><i class="ri-list-check-3"></i></a></button>
                         </td>
                         <td class='sorted'>
                             <button type="button" class="action-button1" style="padding: 0px;border-radius: 5px;" onclick="openPopup()">
@@ -435,7 +448,7 @@
                     <td data-label=" s.no"><a href="#" class="profileLink"><?php echo $row['id']?></a></td>
                         <td data-label=" name"><?php echo $row['first_name']?></td>
                         <td data-label=" task">
-                            <button type="button" class="btn btn-outline-primary"><a href="#" onclick="loadTasks(userId)"><i class="ri-list-check-3"></i></a></button>
+                            <button type="button" class="btn btn-outline-primary task-btn"><a href="#" ><i class="ri-list-check-3"></i></a></button>
                         </td>
                         <td>
                             <button type="button" class="action-button1" style="padding: 0px;border-radius: 5px;" onclick="openPopup()">
@@ -471,11 +484,11 @@
             <h2 style="margin-bottom:15px;">Update Status</h2>
 
 
-            <select name="task" id="taskSelect" style="width: 400px; height: 48px; border-radius:4px;">
+            <select name="task" id="userStatus" style="width: 400px; height: 48px; border-radius:4px;">
                 <option value="task0">Dormant</option>
             </select>
             <br>
-            <select name="task" id="taskSelect" style="width: 400px; height: 48px; border-radius:4px;">
+            <select name="task" id="updatedStatus" style="width: 400px; height: 48px; border-radius:4px;">
                 <option value="Active">Active</option>
                 <option value="Dormant">Dormant</option>
                 <option value="Suspended">Suspended</option>
@@ -517,6 +530,21 @@
             closePopup(); // Close the modal after the action is performed
         }
     </script>
+
+
+<!-- auto submit the form when the user changes checkboxes -->
+<script>
+// Get all checkboxes with the class "status"
+const checkboxes = document.querySelectorAll('.status');
+
+// Add a click event listener to each checkbox
+checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener('change', () => {
+        // Submit the form
+        document.getElementById('statusForm').submit();
+    });
+});
+</script>
 
     
 
@@ -601,15 +629,26 @@ tableRows.forEach((row) => {
 
         // loadTasks(userId);
         // Get the task button from the row
-        const taskButton = row.querySelector('button');
+        const taskButton = row.querySelector('.task-btn');
         // Add a click event listener to the task button
         taskButton.addEventListener('click', (e) => {
             e.preventDefault();
             // Get the user ID from the row
+            console.log(userId);
             loadTasks(userId);
 
         
         });
+
+
+        //get the action button from the row
+        const actionButton = row.querySelector('.action-button1');  
+        //add event listener to the action button
+        actionButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            console.log(userId);
+        });
+
     });
    
 });
@@ -651,6 +690,22 @@ tableRows.forEach((row) => {
 
 
 </script>
+
+<script>
+    
+    function updateStatus(userId){
+        console.log(userId);
+    }
+</script>
+       
+<!-- <script>
+    function changeUserStatus(task_status, task_id) {
+        if(task_status == "Purged/Cancelled")
+        task_status = "cancelled";
+        window.location.href = `changeStatus.php?status=${task_status}&task_id=${task_id}&user_id=<?php echo $userId ?>`;
+    }
+</script> -->
+
 <?php include('closeConnection.php'); ?>
 
 
