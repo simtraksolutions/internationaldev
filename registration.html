@@ -67,36 +67,41 @@
 
     <div class="container">
 
-        
-        
+
+
         <div class="img">
             <center>
                 <img src="https://adore.ivdata.in/cores/img/adore_pcons2.png
             " width="200px">
-                <h2>Create New Account</h2>
-            </center> 
+                <h3 style="margin-bottom: 0px; margin-top:0px;">Create New Account</h3>
+            </center>
         </div>
-    
+
         <form id="signupForm" method="POST" action="registration.php">
             <div class="img">
-              
+
             </div>
             <br>
 
-            <label for="name">Name</label>
-            <input type="text" name="name"  placeholder="Enter your name" id="name"   required >
+            <label for="name"><h4 style="margin-bottom: 0px;
+            margin-top: 10px;">Name</h4></label>
+            <input type="text" name="name" placeholder="Enter your name" id="name" required>
 
-            <label for="coordinatorname">Coordinator name</label>
-            <input type="text" name="coordinator" id="coordinator" placeholder="Enter your Coordinator name"  required>
-            
-            <label for="teamname">Team name</label>
-            <input type="text" name="teamname" id="teamname" placeholder="Enter your Team name"  required>
+            <label for="coordinatorname"><h4 style="margin-bottom: 0px;
+                margin-top: 10px;">Coordinators name</h4></label>
+            <input type="text" name="coordinator" id="coordinator" placeholder="Enter your Coordinator name" required>
 
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email"  placeholder="Enter your email " required>
+            <label for="teamname"><h4 style="margin-bottom: 0px;
+                margin-top: 10px;">Team name</h4></label>
+            <input type="text" name="teamname" id="teamname" placeholder="Enter your Team name" required>
 
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password"   placeholder="Create Your password" required>
+            <label for="email"><h4 style="margin-bottom: 0px;
+                margin-top: 10px;">Email</h4></label>
+            <input type="email" id="email" name="email" placeholder="Enter your email " required>
+
+            <label for="password"><h4 style="margin-bottom: 0px;
+                margin-top: 10px;">Password</h4></label>
+            <input type="password" id="password" name="password" placeholder="Create Your password" required>
             <label style="white-space: nowrap; display: inline-block; margin-right: 10px;">
                 <input type="checkbox" style="display:inline; vertical-align: middle; width:10%;" onclick="showPassword('password')"> Show Password
             </label>
@@ -107,47 +112,46 @@
             <br>
 
 
-            
-            
+
+
 
     </div>
 
     <script>
-          function showPassword(passwordId) {
-        var passwordField = document.getElementById(passwordId);
-        passwordField.type = passwordField.type === 'password' ? 'text' : 'password';
-    }    
-     
-    
+        function showPassword(passwordId) {
+            var passwordField = document.getElementById(passwordId);
+            passwordField.type = passwordField.type === 'password' ? 'text' : 'password';
+        }
+
+
         const loginSection = document.getElementById('login-section');
-    
+
         const signupSection = document.getElementById('signup-section');
-    
+
         const signupLink = document.getElementById('signup-link');
-    
+
         const loginLink = document.getElementById('login-link');
-    
-     
-    
+
+
+
         signupLink.addEventListener('click', () => {
-    
-          loginSection.classList.add('hidden');
-    
-          signupSection.classList.remove('hidden');
-    
+
+            loginSection.classList.add('hidden');
+
+            signupSection.classList.remove('hidden');
+
         });
-    
-     
-    
+
+
+
         loginLink.addEventListener('click', () => {
-    
-          loginSection.classList.remove('hidden');
-    
-          signupSection.classList.add('hidden');
-    
+
+            loginSection.classList.remove('hidden');
+
+            signupSection.classList.add('hidden');
+
         });
-    
-      </script>
+    </script>
     <!-- <script>
         function registrations() {
             // You can add JavaScript logic here for handling the sign-in process
