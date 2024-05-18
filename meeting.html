@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meeting schedules</title>
+    <style>
+        body {
+            font-family: Arial;
+            color: #343a40;
+            background-color: rgb(231, 233, 234);
+            background-image: url(https://www.imageshine.in/uploads/gallery/geometric-Blue-Wallpaper-Free-Download.jpg);
+        }
+        
+        .container {
+            max-width: 1100px;
+            height: 500px;
+            margin-top: 80px;
+            margin-left: 100px;
+            padding: 50px;
+            border-radius: 2px;
+            background-color: rgb(238, 242, 246);
+        }
+        
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .table td,
+        .table th {
+            height: 30px;
+            padding: 12px 15px;
+            border: 0px solid white;
+            text-align: center;
+            font-size: 16px;
+        }
+        
+        .schedule_meeting {
+            float: inline-end;
+            height: auto;
+            width: auto;
+            padding: 8px;
+            border-radius: 4px;
+            color: white;
+            background-color: rgb(41, 41, 127);
+        }
+        
+        .schedule_meeting:hover {
+            background-color: rgb(47, 47, 100);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 450px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .close {
+            color: #aaa;
+            float: right;
+            margin-left: 380px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+        }
+        
+        .modal-content p {
+            margin-bottom: 15px;
+        }
+        
+        .modal-content button {
+            background-color: #13960c;
+            border: none;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .modal-content button:hover {
+            background-color: #0d7709;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div>
+            <h1>Meeting schedules
+                <button class="schedule_meeting" onclick="openPopup()">Schedule Meeting</button>
+            </h1>
+        </div>
+        <hr>
+        <table class="table">
+            <thead>
+                <th>Task</th>
+                <th>Meeting Date/Time</th>
+                <th>Remarks</th>
+            </thead>
+            <tbody>
+                <tr> </tr>
+                <tr> </tr>
+
+            </tbody>
+        </table>
+
+
+
+    </div>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <!--<h2 style="margin-bottom:15px;">Meeting Details</h2>-->
+
+            <label style="margin: 0px;">Task:</label>
+            <select name="task" id="taskSelect" style="width: 400px; margin-bottom: 5px;height: 48px; border-radius:4px;">
+                <option value="task0"></option>
+                <option value="task1">1 Article-own</option>
+                <option value="task2">1 webinar-own</option>
+                <option value="task3">5 Articles</option>
+                <option value="task4">Organise young leader activites</option>
+                <option value="task5">Volunteer Team to be created</option>
+                <option value="task6">20 participants for any program</option>
+                <option value="task7">Organise webinars:soaring wing</option>
+                <option value="task8">Counducting Sessions</option>
+                <option value="task9">Centre onboarding</option>
+                <option value="task10">Social survey-issues/traning</option>
+                <option value="task11">Wisetalk</option>
+                <option value="task12">Empathee</option>
+                <option value="task13">Gypse</option>
+                <option value="task14">Synergy</option>
+                <option value="task15">Interesting educational module</option>
+                <option value="task15">Young leader-college</option>
+                <option value="task16">Workshops organise</option>
+                <option value="task17">Wisetalk(translation)-q/a</option>
+                <option value="task18">Global Indian</option>
+                <option value="task19">Inspirit</option>
+                <option value="task20">Spring</option>
+                <option value="task21">Prograce:career</option>
+            </select>
+            <input type="text" style="margin-bottom: 5px; width: 400px; height: 48px; border-radius:4px;">
+            <br>
+            <label>Meeting Time/Date</label>
+            <select name="task" id="taskSelect" style="width: 400px; height: 48px; border-radius:4px;">
+            <option value="task0"></option>                
+            </select>
+            <br>
+            <label>Remarks</label><br>
+            <input style="margin-bottom: 5px; width: 390px; height: 48px; border-radius:4px;" type="text">
+            <select name="task" id="taskSelect" style="width: 400px; height: 48px; border-radius:4px;">
+            <option value="task0"></option>                
+            </select>
+            <br>
+            <br>
+
+            <button onclick="submitStatus()">Update</button>
+        </div>
+    </div>
+
+    <script>
+        function openPopup() {
+            var modal = document.getElementById('myModal');
+            modal.style.display = 'block';
+        }
+
+        function closePopup() {
+            var modal = document.getElementById('myModal');
+            modal.style.display = 'none';
+        }
+
+        function submitStatus() {
+
+            alert('Status updated successfully!');
+            closePopup();
+        }
+    </script>
+
+
+</body>
+
+</html>
