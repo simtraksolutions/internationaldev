@@ -191,8 +191,8 @@ $team = array_values($team);
         <div class="form-group" id="sortParameters">
           <!-- Dynamic dropdowns will be appended here -->
         </div>
-        <button type="button" id="addParamBtn">Add Another Parameter</button>
-        <button type="submit">Submit</button>
+        <button type="button" id="addParamBtn">Add more fields</button>
+        <button type="submit" name="sort_data">Submit</button>
       </form>
 
 
@@ -278,9 +278,9 @@ $team = array_values($team);
 
 if($_SERVER["REQUEST_METHOD"]=='POST'){
   //print all the data that is selected in the form when the form gets submitted
-  echo '<pre>';
-  print_r($_POST['parameter']);
-  print_r($_POST['values']);
+ 
+  // print_r($_POST['parameter']);
+  // print_r($_POST['values']);
 
  
  //create fetching query based on the selected fields in the form
@@ -317,26 +317,18 @@ $query .= " WHERE $conditionsString";
 
 
 //print the prepared query
-echo $query;
+// echo $query;
 
 //execute the query
 $stmt = $conn->prepare($query);
 $stmt->execute();
-$result = $stmt->get_result();  // get the result from the executed statement
+$sort_result = $stmt->get_result();  // get the result from the executed statement
 //close the statement
 $stmt->close();
 
 }
-//print the fetched data
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        print_r($row);
-    }
-}
 
-
-
-  echo '</pre>';
+ 
 
 
 

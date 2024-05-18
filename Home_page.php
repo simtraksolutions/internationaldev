@@ -335,6 +335,16 @@
         .status{
             margin: 2px;
         }
+
+        .sort-form{
+            position: absolute;
+            /* place the form in the middle of the page */
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+            z-index: 2;
+        }
     </style>
 </head>
 
@@ -346,8 +356,11 @@
         <a href="http://127.0.0.1:5501/Admin_page.html#" title=" DeputyAdmin_page"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjoxxJYsY_IZZcGn3MLq8ayWfk9YGzxRZ-3emZLUpVJQ6cFkfR_VRDBFc05tdBS7IqOcs&usqp=CAU" style="height: 28px; width:28px"></a>
         <a href="http://127.0.0.1:5501/sign_in.html" title="Logout"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFvB6_NT7_HiGoWadFTjXVTOmOqrtII8V4jTrlJLInxg&s"></a>
     </div>
-
     <div id="content">
+        <div class="sort-form">
+                        <h4 class="close-form" style="cursor: pointer;">x</h4>
+                        <?php include("sort_form.php")?>
+        </div>
    
         <div class="container">
 
@@ -362,26 +375,9 @@
                         <input type="text" name="search" id="searchInput" onkeyup="filterTable()">
                     </div>
                 </label>
-                <label>
-                <div>
-                <form method="POST" id="statusForm">
-                <div class="status">
-        Active <input type="checkbox" name="active" id="active" class="status" <?php echo isset($_POST['active']) ? 'checked' : ''; ?>>
-        Dormant <input type="checkbox" name="dormant" id="dormant" class="status" <?php echo isset($_POST['dormant']) ? 'checked' : ''; ?>>
-        Suspended<input type="checkbox" name="suspended" id="suspended" class="status" <?php echo isset($_POST['suspended']) ? 'checked' : ''; ?>>
-    </div>
-                <select name="sort_field" id="sort" style="height:30px;width:200px; padding: 5px;" onchange="this.form.submit()">
-                    <option></option>
-                    <option value="1 Article-own" <?php echo (isset($_POST['sort_field']) && $_POST['sort_field'] == '1 Article-own') ? 'selected' : ''; ?>>1 Article-own</option>
-                    <option value="1 webinar-own" <?php echo (isset($_POST['sort_field']) && $_POST['sort_field'] == '1 webinar-own') ? 'selected' : ''; ?>>1 webinar-own</option>
-                    <option value="5 Articles" <?php echo (isset($_POST['sort_field']) && $_POST['sort_field'] == '5 Articles') ? 'selected' : ''; ?>>5 Articles</option>
-                    <option value="Organise young leader activites" <?php echo (isset($_POST['sort_field']) && $_POST['sort_field'] == 'Organise young leader activites') ? 'selected' : ''; ?>>Organise young leader activites</option>
-                    <option value="Volunteer Team to be created" <?php echo (isset($_POST['sort_field']) && $_POST['sort_field'] == 'Volunteer Team to be created') ? 'selected' : ''; ?>>Volunteer Team to be created</option>
-                    <option value="20 participants for any program" <?php echo (isset($_POST['sort_field']) && $_POST['sort_field'] == '20 participants for any program') ? 'selected' : ''; ?>>20 participants for any program</option>
-                </select>
-            </form>
-                </div>
-                </label>
+                <a href="" class="button sort-btn" style= "margin: 5px;"> Sort Data </a>
+                <!-- clear the sorting button is clicked-->  
+                <button type="submit" name="clear-sort" class="button clear-sort" style="margin: 5px;">Clear Sorting</button>
             </div>
             <br>
             <br>
@@ -418,31 +414,17 @@
                     <!--<th></th>-->
                 </thead>
                 <tbody>
-
-                <?php foreach ($volunteers as $volunteer): ?>
-                    <tr class='sorted'>
-                        <!-- Add your table data here -->
-                    <td class='sorted' data-label=" s.no"><a href="#" class="profileLink"><?php echo $volunteer['id']?></a></td>
-                        <td class='sorted'><?php echo $volunteer['first_name']; ?></td>
-                        <td class='sorted' data-label=" task">
-                            <button type="button" class="btn btn-outline-primary"><a href="#"><i class="ri-list-check-3"></i></a></button>
-                        </td>
-                        <td class='sorted'>
-                            <button type="button" class="action-button1" style="padding: 0px;border-radius: 5px;" onclick="openPopup()">
-                                <img src="https://cdn.iconscout.com/icon/premium/png-256-thumb/update-2473968-2057919.png?f=webp"
-                                    style="width:38px; height:30px; background-color:#262697; "
-                                    title="Update Status">
-                            </button>
-                        </td>
-                        <td class='sorted' data-label=" status"><?php echo $volunteer['user_status']?></td>
-                        <!-- Add more table data here -->
-                    </tr>
-                <?php endforeach; ?>
-
-
                     <?php
-                        if($registeredUser->num_rows > 0)
-                        {  while($row = $registeredUser->fetch_assoc()){?>
+                    //check if the sort_form has been submitted
+                
+                    if(isset($_POST['sort_data'])){
+                        $fetch_data = $sort_result;
+                    }
+                    else{
+                        $fetch_data = $registeredUser;
+                    }
+                    if($fetch_data->num_rows > 0)
+                        {  while($row = $fetch_data->fetch_assoc()){?>
                   
                     <tr role="row" class="row-1">
                     <td data-label=" s.no"><a href="#" class="profileLink"><?php echo $row['id']?></a></td>
@@ -698,13 +680,64 @@ tableRows.forEach((row) => {
     }
 </script>
        
-<!-- <script>
-    function changeUserStatus(task_status, task_id) {
-        if(task_status == "Purged/Cancelled")
-        task_status = "cancelled";
-        window.location.href = `changeStatus.php?status=${task_status}&task_id=${task_id}&user_id=<?php echo $userId ?>`;
-    }
-</script> -->
+<script>
+   // Get the sort button
+const sortButton = document.querySelector('.sort-btn');
+// Get the sort form
+const sortForm = document.querySelector('.sort-form');
+// Add a click event listener to the sort button
+sortButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    // Toggle the display of the sort form
+    sortForm.style.display = sortForm.style.display === 'block' ? 'none' : 'block';
+    //make the container blur when the form is displayed
+    document.querySelector('.container').style.filter = sortForm.style.display === 'block' ? 'blur(5px)' : 'none';
+
+    //get the close button
+    const closeForm = document.querySelector('.close-form');
+    //add event listener to the close button
+    closeForm.addEventListener('click', (e) => {
+        e.preventDefault();
+        sortForm.style.display = 'none';
+        document.querySelector('.container').style.filter = 'none';
+    });
+
+});
+
+//clear the sorting when the clear sorting button is clicked
+const clearSortButton = document.querySelector('.clear-sort');
+clearSortButton.addEventListener('click', (e) => {
+    e.preventDefault();
+   //get the data of all the registered users
+    const registeredUsers = <?php echo json_encode($registeredUser); ?>;
+    //get the table body
+    const tableBody = document.querySelector('tbody');
+    //clear the table body
+    tableBody.innerHTML = '';
+    //loop through the registered users and display them in the table
+    registeredUsers.forEach((user) => {
+        const row = `
+        <tr role="row" class="row-1">
+            <td data-label=" s.no"><a href="#" class="profileLink">${user.id}</a></td>
+            <td data-label=" name">${user.first_name}</td>
+            <td data-label=" task">
+                <button type="button" class="btn btn-outline-primary task-btn"><a href="#" ><i class="ri-list-check-3"></i></a></button>
+            </td>
+            <td>
+                <button type="button" class="action-button1" style="padding: 0px;border-radius: 5px;" onclick="openPopup()">
+                    <img src="https://cdn.iconscout.com/icon/premium/png-256-thumb/update-2473968-2057919.png?f=webp"
+                        style="width:38px; height:30px; background-color:#262697; "
+                        title="Update Status">
+                </button>
+            </td>
+            <td data-label=" status">${user.user_status}</td>
+        </tr>
+        `;
+        tableBody.innerHTML += row;
+    });
+});
+
+</script>
 
 <?php include('closeConnection.php'); ?>
 
