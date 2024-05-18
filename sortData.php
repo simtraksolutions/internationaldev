@@ -23,11 +23,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // If 'all' is selected in the sort_field or no task is selected, ignore the task condition
         if ($task == 'all' || $task == '') {
-            $sql = "SELECT volunteerdetails.* FROM addvolunteer1 LEFT JOIN volunteerdetails ON addvolunteer1.user_id = volunteerdetails.id WHERE volunteerdetails.status IN ($statusPlaceholders) ORDER BY status";
+            $sql = "SELECT volunteerdetails.* FROM addvolunteer1 LEFT JOIN volunteerdetails ON addvolunteer1.user_id = volunteerdetails.id WHERE volunteerdetails.user_status IN ($statusPlaceholders) ORDER BY user_status";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param(str_repeat('s', count($statuses)), ...$statuses);
         } else {
-            $sql = "SELECT volunteerdetails.* FROM addvolunteer1 LEFT JOIN volunteerdetails ON addvolunteer1.user_id = volunteerdetails.id WHERE task_name = ? AND volunteerdetails.status IN ($statusPlaceholders) ORDER BY status";
+            $sql = "SELECT volunteerdetails.* FROM addvolunteer1 LEFT JOIN volunteerdetails ON addvolunteer1.user_id = volunteerdetails.id WHERE task_name = ? AND volunteerdetails.user_status IN ($statusPlaceholders) ORDER BY status";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param(str_repeat('s', count($statuses) + 1), $task, ...$statuses);
         }

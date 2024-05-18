@@ -434,7 +434,7 @@
                                     title="Update Status">
                             </button>
                         </td>
-                        <td class='sorted' data-label=" status"><?php echo $volunteer['status']?></td>
+                        <td class='sorted' data-label=" status"><?php echo $volunteer['user_status']?></td>
                         <!-- Add more table data here -->
                     </tr>
                 <?php endforeach; ?>
@@ -462,7 +462,7 @@
                                     style="width:38px; height:30px; background-color:#4f6f4e;">
                             </button>-->
                         </td>
-                        <td data-label=" status"><?php echo $row['status']?></td>
+                        <td data-label=" status"><?php echo $row['user_status']?></td>
                         <!--<td data-label="  "></td>-->
                     </tr>
 

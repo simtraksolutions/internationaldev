@@ -300,7 +300,7 @@ include 'fetch_data.php';
                         <td class="name-cell" data-label=" name"><?php echo $user['first_name']?></td>
                         <td data-label=" coordinator name"><?php echo $result['coordinator']?></td>
                         <td data-label=" team name"><?php echo $result['teamname']?></td>
-                        <td data-label=" status"><?php echo $user['status']?></td>
+                        <td data-label=" status"><?php echo $user['user_status']?></td>
                         <!--<td data-label="  "></td>-->
                     </tr>        
                 <?php }}?>
