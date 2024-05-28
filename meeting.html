@@ -42,12 +42,27 @@
             height: auto;
             width: auto;
             padding: 8px;
+            margin-right: 5px;
             border-radius: 4px;
             color: white;
             background-color: rgb(41, 41, 127);
         }
         
         .schedule_meeting:hover {
+            background-color: rgb(47, 47, 100);
+        }
+        
+        .update_remarks {
+            float: inline-end;
+            height: auto;
+            width: auto;
+            padding: 8px;
+            border-radius: 4px;
+            color: white;
+            background-color: rgb(41, 41, 127);
+        }
+        
+        .update_remarks:hover {
             background-color: rgb(47, 47, 100);
         }
         
@@ -103,6 +118,59 @@
         .modal-content button:hover {
             background-color: #0d7709;
         }
+        
+        .modal1 {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        
+        .modal-content1 {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 450px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .close1 {
+            color: #aaa;
+            float: right;
+            margin-left: 380px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close1:hover,
+        .close1:focus {
+            color: black;
+            text-decoration: none;
+        }
+        
+        .modal-content1 p {
+            margin-bottom: 15px;
+        }
+        
+        .modal-content1 button {
+            background-color: #13960c;
+            border: none;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .modal-content1 button:hover {
+            background-color: #0d7709;
+        }
     </style>
 </head>
 
@@ -111,6 +179,7 @@
     <div class="container">
         <div>
             <h1>Meeting schedules
+                <button class="update_remarks" title="update remarks and status" onclick="openPopup1()">Remarks</button>
                 <button class="schedule_meeting" onclick="openPopup()">Schedule Meeting</button>
             </h1>
         </div>
@@ -119,11 +188,33 @@
             <thead>
                 <th>Task</th>
                 <th>Meeting Date/Time</th>
+                <th></th>
+                <th>Status</th>
                 <th>Remarks</th>
             </thead>
             <tbody>
-                <tr> </tr>
-                <tr> </tr>
+                <tr>
+                    <td>
+                        <h2 style="margin: 4px;">1 Article-own</h2>
+                        <div style="margin-left:6px;">awarness on education </div>
+                        <!--<button class="update_remarks" onclick="openPopup1()">Remarks</button>-->
+                    </td>
+                    <td>
+                        <h3>Date:30th may </h3>
+                        <h3>Time:8'0 pm </h3>
+                    </td>
+
+                    <td> </td>
+                    <td> </td>
+
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                </tr>
 
             </tbody>
         </table>
@@ -163,22 +254,38 @@
                 <option value="task20">Spring</option>
                 <option value="task21">Prograce:career</option>
             </select>
-            <input type="text" style="margin-bottom: 5px; width: 400px; height: 48px; border-radius:4px;">
+            <input type="text" style="margin-bottom: 5px; width: 392px; height: 45px; border-radius:4px;">
             <br>
             <label>Meeting Time/Date</label>
-            <select name="task" id="taskSelect" style="width: 400px; height: 48px; border-radius:4px;">
-            <option value="task0"></option>                
-            </select>
+            <input type="datetime-local" style="margin-bottom: 5px; width: 392px; height: 45px; border-radius:4px;">
             <br>
-            <label>Remarks</label><br>
-            <input style="margin-bottom: 5px; width: 390px; height: 48px; border-radius:4px;" type="text">
+            <!--<label>Status</label><br>
             <select name="task" id="taskSelect" style="width: 400px; height: 48px; border-radius:4px;">
             <option value="task0"></option>                
-            </select>
+            </select>-->
+            <!--<label>Remarks</label>
+            <input type="text" style="margin-bottom: 5px; width: 392px; height: 45px; border-radius:4px;">-->
             <br>
             <br>
 
-            <button onclick="submitStatus()">Update</button>
+            <button onclick="submitStatus()">Schedule</button>
+        </div>
+    </div>
+
+    <div id="myModal1" class="modal1">
+        <div class="modal-content1">
+            <span class="close1" onclick="closePopup1()">&times;</span>
+            <!--<h2 style="margin-bottom:15px;">Meeting Details</h2>-->
+            <label>Status</label><br>
+            <select name="task" id="taskSelect" style="width: 400px; height: 48px; border-radius:4px;">
+            <option value="task0"></option>                
+            </select>
+            <label>Remarks</label>
+            <input type="text" style="margin-bottom: 5px; width: 392px; height: 45px; border-radius:4px;">
+            <br>
+            <br>
+
+            <button onclick="submitStatus()">Submit</button>
         </div>
     </div>
 
@@ -195,8 +302,26 @@
 
         function submitStatus() {
 
-            alert('Status updated successfully!');
+            //alert('Status updated successfully!');
             closePopup();
+        }
+    </script>
+
+    <script>
+        function openPopup1() {
+            var modal1 = document.getElementById('myModal1');
+            modal1.style.display = 'block';
+        }
+
+        function closePopup1() {
+            var modal1 = document.getElementById('myModal1');
+            modal1.style.display = 'none';
+        }
+
+        function submitStatus1() {
+
+            alert('Status updated successfully!');
+            closePopup1();
         }
     </script>
 
